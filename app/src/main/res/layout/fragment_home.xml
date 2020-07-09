@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/BackGround"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:shimmer="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:layoutDirection="rtl"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:textDirection="rtl">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!--بخش مربوط به جستجو-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/stroke_relative_search"
+                android:orientation="horizontal"
+                android:weightSum="12">
+
+                <AutoCompleteTextView
+                    android:id="@+id/txt_Search"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:backgroundTint="@color/colorActionBar"
+                    android:completionThreshold="1"
+                    android:fontFamily="@font/iran_sans"
+                    android:hint="@string/SearchYourJob"
+                    android:paddingRight="10dp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorBlack"
+                    android:textColorHint="@color/colorPaleBlack"
+                    android:textSize="12sp"
+                    android:imeOptions="actionSearch"
+                    android:theme="@style/MyEditTextStyle2"/>
+
+                <ImageView
+                    android:id="@+id/img_Filter_Search"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:padding="10dp"
+                    android:src="@drawable/filter_search"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"/>
+
+            </LinearLayout>
+
+
+
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                    android:id="@+id/SwipeRefresh"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                    <androidx.core.widget.NestedScrollView
+                        android:id="@+id/NestedScroll"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <!--بخش مربوط به اسلایدر-->
+                            <RelativeLayout
+                                android:id="@+id/Slider"
+                                android:layout_width="match_parent"
+                                android:layout_height="150dp"
+                                android:layout_marginBottom="0dp"
+                                android:paddingBottom="0dp">
+
+                                <androidx.viewpager.widget.ViewPager
+                                    android:id="@+id/SliderPager"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent" />
+
+                                <ImageView
+                                    android:id="@+id/Slider_Right"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginRight="10dp"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:src="@drawable/right" />
+
+                                <ImageView
+                                    android:id="@+id/Slider_Left"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="10dp"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:src="@drawable/left" />
+
+                            </RelativeLayout>
+
+                            <!--بخش مربوط به آیتم ها-->
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="8dp">
+
+                                ///در اینجا لودینگ آیتم ها نمایش داده می شود
+
+                                <ProgressBar
+                                    android:id="@+id/progressbar_items"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_below="@id/RecyclerItem"
+                                    android:layout_centerHorizontal="true"
+                                    android:visibility="gone" />
+
+                                //در اینجا لیست آیتم ها نمایش داده می شود
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/RecyclerItem"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent" />
+
+                                <com.facebook.shimmer.ShimmerFrameLayout
+                                    android:id="@+id/shimmer_view_container"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical"
+                                    shimmer:duration="800">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="vertical">
+
+                                        <include layout="@layout/recycler_item" />
+
+                                        <include layout="@layout/recycler_item" />
+
+                                        <include layout="@layout/recycler_item" />
+
+                                        <include layout="@layout/recycler_item" />
+
+                                    </LinearLayout>
+
+                                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                                //بخش مربوط به نبود آیتم
+                                <com.facebook.shimmer.ShimmerFrameLayout
+                                    android:id="@+id/NoData"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    shimmer:duration="800"
+                                    android:visibility="gone"
+                                    android:layout_marginTop="10dp">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <ImageView
+                                            android:id="@+id/img_no_data"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:src="@drawable/no_data"/>
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/img_no_data"
+                                            android:text="@string/NoData"
+                                            android:gravity="center"
+                                            android:layout_marginTop="20dp"
+                                            android:textColor="@color/colorBlack"
+                                            android:textSize="20sp"/>
+
+                                    </RelativeLayout>
+
+                                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                                <RelativeLayout
+                                    android:id="@+id/NoInternet"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="30dp"
+                                    android:visibility="gone">
+
+                                    <com.facebook.shimmer.ShimmerFrameLayout
+                                        android:id="@+id/Shimmer_No_Internet"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        shimmer:duration="800">
+
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content">
+
+                                            <ImageView
+                                                android:id="@+id/img_No_Internet"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:src="@drawable/no_internet" />
+
+                                            <TextView
+                                                android:id="@+id/lbl_Error"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@id/img_No_Internet"
+                                                android:text="@string/CheckYourInternet"
+                                                android:textColor="@color/colorBlack"
+                                                android:gravity="center"
+                                                android:textSize="18sp"
+                                                android:layout_marginTop="5dp"/>
+
+                                        </RelativeLayout>
+
+                                    </com.facebook.shimmer.ShimmerFrameLayout>
+
+                                    <TextView
+                                        android:id="@+id/lbl_TryingAgain"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/Shimmer_No_Internet"
+                                        android:layout_marginTop="10dp"
+                                        android:textSize="18sp"
+                                        android:textColor="@color/colorPaleBlack"
+                                        android:gravity="center"
+                                        android:text="@string/TryingAgain"
+                                        android:clickable="true"
+                                        android:padding="5dp"
+                                        android:background="?android:attr/selectableItemBackground"/>
+
+                                </RelativeLayout>
+
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+
+                    </androidx.core.widget.NestedScrollView>
+
+                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+        </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="40dp"
+        android:src="@drawable/ic_top" />
+
+</RelativeLayout>

@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorWhite"
+    android:clickable="true"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!--بخش مربوط یه تولبار-->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:cardElevation="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorActionBar"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <LinearLayout
+                    android:id="@+id/Back"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:weightSum="3"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="5dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/back"
+                        android:layout_weight="1"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:text="@string/Back"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorBlack"
+                        android:fontFamily="@font/iran_sans"
+                        android:gravity="center|right"
+                        android:paddingRight="2dp"/>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"/>
+
+                <ImageView
+                    android:id="@+id/Share"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/share_item"
+                    android:clickable="true"/>
+
+                <ImageView
+                    android:id="@+id/Like"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/dont_like"
+                    android:clickable="true" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/Slider"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:padding="2dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:cardElevation="1dp"
+                            android:padding="2dp">
+                            <ImageView
+                                android:id="@+id/img"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/error_slider"
+                                android:scaleType="fitXY"/>
+                        </androidx.cardview.widget.CardView>
+
+                    </RelativeLayout>
+
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/Loading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                            <TextView
+                                android:id="@+id/lbl_Title"
+                                android:layout_marginTop="20dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/iran_sans"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="16sp"
+                                android:text="@string/Loading"
+                                android:gravity="center"
+                                android:textStyle="bold"
+                                android:paddingRight="10dp"
+                                android:paddingLeft="10dp"/>
+
+                        <TextView
+                            android:id="@+id/lbl_DateInsert"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/colorCentral"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/iran_sans"
+                            android:gravity="center"/>
+
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="25dp"
+                            android:scrollbars="none">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_gravity="right"
+                                android:paddingRight="10dp"
+                                android:paddingLeft="10dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:textSize="14sp"
+                                    android:textColor="@color/colorBlack"
+                                    android:fontFamily="@font/iran_sans"
+                                    android:text="@string/Salary_And_Benefits"/>
+
+                                <TextView
+                                    android:id="@+id/lbl_Price"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:paddingRight="5dp"
+                                    android:textColor="@color/colorBlack"
+                                    android:fontFamily="@font/iran_sans"
+                                    android:textSize="14sp"/>
+
+                            </LinearLayout>
+
+                        </HorizontalScrollView>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:gravity="right"
+                            android:layout_marginTop="15dp"
+                            android:paddingRight="10dp"
+                            android:paddingLeft="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Job_Type"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/iran_sans"/>
+
+                            <TextView
+                                android:id="@+id/lbl_JobType"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/iran_sans"
+                                android:layout_marginRight="2dp"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="15dp"
+                            android:background="@color/colorActionBar">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/colorGray"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginLeft="5dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="30dp"
+                                android:weightSum="5"
+                                android:paddingRight="10dp"
+                                android:paddingLeft="10dp">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal"
+                                    android:layout_weight="3">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:text="@string/Gender"
+                                        android:textSize="14sp"
+                                        android:textColor="@color/colorBlack"
+                                        android:fontFamily="@font/iran_sans"/>
+
+                                    <TextView
+                                        android:id="@+id/lbl_Gender"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:textSize="14sp"
+                                        android:textColor="@color/colorBlack"
+                                        android:fontFamily="@font/iran_sans"
+                                        android:layout_marginRight="5dp"/>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal"
+                                    android:layout_weight="2">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:text="@string/Has_Insurance"
+                                        android:textColor="@color/colorBlack"
+                                        android:textSize="14sp"
+                                        android:fontFamily="@font/iran_sans"/>
+
+                                    <TextView
+                                        android:id="@+id/lbl_Insurance"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:textColor="@color/colorBlack"
+                                        android:textSize="14sp"
+                                        android:fontFamily="@font/iran_sans"
+                                        android:layout_marginRight="5dp"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="15dp"
+                                android:paddingRight="10dp"
+                                android:paddingLeft="10dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:textColor="@color/colorBlack"
+                                    android:textSize="14sp"
+                                    android:fontFamily="@font/iran_sans"
+                                    android:text="@string/The_Age_Range"/>
+
+                                <TextView
+                                    android:id="@+id/lbl_Age_Range"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginRight="5dp"
+                                    android:textColor="@color/colorBlack"
+                                    android:textSize="14sp"
+                                    android:fontFamily="@font/iran_sans"/>
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="15dp"
+                                android:paddingRight="10dp"
+                                android:paddingLeft="10dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="@string/JobTime"
+                                    android:textColor="@color/colorBlack"
+                                    android:textSize="14sp"
+                                    android:fontFamily="@font/iran_sans"/>
+
+                                <TextView
+                                    android:id="@+id/lbl_JobTime"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:paddingRight="5dp"
+                                    android:textColor="@color/colorBlack"
+                                    android:textSize="14sp"
+                                    android:fontFamily="@font/iran_sans"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="15dp"
+                                android:paddingRight="10dp"
+                                android:paddingLeft="10dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:textColor="@color/colorBlack"
+                                    android:textSize="14sp"
+                                    android:fontFamily="@font/iran_sans"
+                                    android:text="@string/HoursOfWork"/>
+
+                                <TextView
+                                    android:id="@+id/lbl_HoursOfWork"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginRight="5dp"
+                                    android:textColor="@color/colorBlack"
+                                    android:textSize="14sp"
+                                    android:fontFamily="@font/iran_sans"
+                                    android:singleLine="true"/>
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="30dp"
+                                android:background="@color/colorGray"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginLeft="5dp"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingRight="10dp"
+                            android:paddingLeft="10dp"
+                            android:layout_marginTop="20dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textColor="@color/colorBlack"
+                                android:fontFamily="@font/iran_sans"
+                                android:textSize="14sp"
+                                android:text="@string/Degree_Of_Education"/>
+
+                            <HorizontalScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scrollbars="none">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal">
+
+                                    <RelativeLayout
+                                        android:id="@+id/R_Madrak_1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:background="@drawable/border_degree_of_education"
+                                        android:layout_marginRight="10dp"
+                                        android:visibility="gone">
+
+                                        <TextView
+                                            android:id="@+id/L_Madrak_1"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:textColor="@color/colorWhite"
+                                            android:fontFamily="@font/iran_sans"
+                                            android:textSize="12sp"
+                                            android:text="دکترا"
+                                            android:paddingRight="20dp"
+                                            android:paddingLeft="20dp"
+                                            android:paddingTop="3dp"
+                                            android:paddingBottom="3dp"/>
+
+                                    </RelativeLayout>
+                                    <RelativeLayout
+                                        android:id="@+id/R_Madrak_2"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:background="@drawable/border_degree_of_education"
+                                        android:layout_marginRight="10dp"
+                                        android:visibility="gone">
+
+                                        <TextView
+                                            android:id="@+id/L_Madrak_2"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:textColor="@color/colorWhite"
+                                            android:fontFamily="@font/iran_sans"
+                                            android:textSize="12sp"
+                                            android:text="فوق لیسانس"
+                                            android:paddingRight="20dp"
+                                            android:paddingLeft="20dp"
+                                            android:paddingTop="3dp"
+                                            android:paddingBottom="3dp"/>
+
+                                    </RelativeLayout>
+                                    <RelativeLayout
+                                        android:id="@+id/R_Madrak_3"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:background="@drawable/border_degree_of_education"
+                                        android:layout_marginRight="10dp"
+                                        android:visibility="gone">
+
+                                        <TextView
+                                            android:id="@+id/L_Madrak_3"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:textColor="@color/colorWhite"
+                                            android:fontFamily="@font/iran_sans"
+                                            android:textSize="12sp"
+                                            android:text="فوق دیپلم"
+                                            android:paddingRight="20dp"
+                                            android:paddingLeft="20dp"
+                                            android:paddingTop="3dp"
+                                            android:paddingBottom="3dp"/>
+
+                                    </RelativeLayout>
+                                </LinearLayout>
+
+                            </HorizontalScrollView>
+
+
+
+                        </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textColor="@color/colorBlack"
+                            android:fontFamily="@font/iran_sans"
+                            android:textSize="14sp"
+                            android:text="@string/Major2"/>
+
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="none">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <RelativeLayout
+                                    android:id="@+id/R_Major_1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/border_major"
+                                    android:layout_marginRight="15dp"
+                                    android:visibility="gone">
+
+                                    <TextView
+                                        android:id="@+id/L_Major_1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:textColor="@color/colorBlack"
+                                        android:fontFamily="@font/iran_sans"
+                                        android:textSize="12sp"
+                                        android:text="کامپیوتر"
+                                        android:paddingRight="20dp"
+                                        android:paddingLeft="20dp"
+                                        android:paddingTop="3dp"
+                                        android:paddingBottom="3dp"/>
+
+                                </RelativeLayout>
+                                <RelativeLayout
+                                    android:id="@+id/R_Major_2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/border_major"
+                                    android:layout_marginRight="10dp"
+                                    android:visibility="gone">
+
+                                    <TextView
+                                        android:id="@+id/L_Major_2"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:textColor="@color/colorBlack"
+                                        android:fontFamily="@font/iran_sans"
+                                        android:textSize="12sp"
+                                        android:text="آب خیز داری"
+                                        android:paddingRight="20dp"
+                                        android:paddingLeft="20dp"
+                                        android:paddingTop="3dp"
+                                        android:paddingBottom="3dp"/>
+
+                                </RelativeLayout>
+                                <RelativeLayout
+                                    android:id="@+id/R_Major_3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/border_major"
+                                    android:layout_marginRight="10dp"
+                                    android:visibility="gone">
+
+                                    <TextView
+                                        android:id="@+id/L_Major_3"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:textColor="@color/colorBlack"
+                                        android:fontFamily="@font/iran_sans"
+                                        android:textSize="12sp"
+                                        android:text="آبیاری گیاهان دریایی"
+                                        android:paddingRight="20dp"
+                                        android:paddingLeft="20dp"
+                                        android:paddingTop="3dp"
+                                        android:paddingBottom="3dp"/>
+
+                                </RelativeLayout>
+
+                            </LinearLayout>
+
+                        </HorizontalScrollView>
+
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/iran_sans"
+                        android:layout_marginTop="30dp"
+                        android:gravity="center"
+                        android:text="@string/Description"/>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        app:cardCornerRadius="2dp"
+                        app:cardElevation="1.5dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp">
+
+                        <TextView
+                            android:id="@+id/lbl_Description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="5dp"
+                            android:paddingRight="5dp"
+                            android:paddingLeft="5dp"
+                            android:textAlignment="center"
+                            android:textDirection="rtl"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/iran_sans"
+                            android:lineSpacingExtra="8dp"/>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <Button
+                            android:id="@+id/btn_infringement"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="@string/Report_Abuse"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="16dp"
+                            android:fontFamily="@font/iran_sans"
+                            android:background="@drawable/background_btn_infringement"/>
+
+                        <RelativeLayout
+                            android:id="@+id/btnCall"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:background="@drawable/background_btn_central"
+                            android:clickable="true">
+
+                            <ImageView
+                                android:id="@+id/img_btn_Call"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/call"
+                                android:layout_centerVertical="true"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_toLeftOf="@id/img_btn_Call"
+                                android:text="@string/Call"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="16dp"
+                                android:fontFamily="@font/iran_sans"
+                                android:gravity="center"
+                                android:layout_marginRight="8dp"/>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
+    android:background="@color/colorWhite"
+    android:clickable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:cardElevation="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorActionBar"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <LinearLayout
+                    android:id="@+id/Back"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:weightSum="3"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="5dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/back"
+                        android:layout_weight="1"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:text="@string/Back"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorBlack"
+                        android:fontFamily="@font/iran_sans"
+                        android:gravity="center|right"
+                        android:paddingRight="2dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10"
+                android:textDirection="ltr"
+                android:layoutDirection="ltr"
+                android:layout_marginTop="30dp"
+                android:paddingRight="5dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="9"
+                    android:fontFamily="@font/iran_sans"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorBlack"
+                    android:text="@string/TextCallMe"
+                    android:layoutDirection="rtl"
+                    android:textDirection="rtl"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"/>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/headphone"
+                    android:padding="4dp"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/TextCallMe2"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="50dp"
+                android:paddingRight="15dp"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/telegram"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="30dp"
+                app:cardBackgroundColor="@color/colorTelegram"
+                app:cardCornerRadius="5dp"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardElevation="0dp"
+                android:clickable="true"
+                app:cardPreventCornerOverlap="false"
+                app:cardUseCompatPadding="false"
+                android:textDirection="ltr"
+                android:layoutDirection="ltr">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:fontFamily="@font/iran_sans"
+                        android:textColor="@color/colorWhite"
+                        android:layoutDirection="rtl"
+                        android:textDirection="rtl"
+                        android:gravity="right"
+                        android:text="@string/Telegram"
+                        android:textSize="16sp"
+                        android:paddingRight="8dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"/>
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:background="@drawable/background_social_network"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/telegram"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/instagram"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/colorInstagram"
+                app:cardCornerRadius="5dp"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardElevation="0dp"
+                android:clickable="true"
+                app:cardPreventCornerOverlap="false"
+                app:cardUseCompatPadding="false"
+                android:textDirection="ltr"
+                android:layoutDirection="ltr">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:fontFamily="@font/iran_sans"
+                        android:textColor="@color/colorWhite"
+                        android:layoutDirection="rtl"
+                        android:textDirection="rtl"
+                        android:gravity="right"
+                        android:text="@string/Instagram"
+                        android:textSize="16sp"
+                        android:paddingRight="8dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"/>
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:background="@drawable/background_social_network"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/instagram"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/whatsapp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/colorWhatsApp"
+                app:cardCornerRadius="5dp"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardElevation="0dp"
+                android:clickable="true"
+                app:cardPreventCornerOverlap="false"
+                app:cardUseCompatPadding="false"
+                android:textDirection="ltr"
+                android:layoutDirection="ltr">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:fontFamily="@font/iran_sans"
+                        android:textColor="@color/colorWhite"
+                        android:layoutDirection="rtl"
+                        android:textDirection="rtl"
+                        android:gravity="right"
+                        android:text="@string/WhatsApp"
+                        android:textSize="16sp"
+                        android:paddingRight="8dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"/>
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:background="@drawable/background_social_network">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/whatsapp"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/iran_sans"
+                android:textSize="14sp"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:textColor="@color/colorBlack"
+                android:text="@string/TextCallMe3"
+                android:lineSpacingExtra="10dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/btn_SMS"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/SMS"
+            android:textColor="@color/colorBlack"
+            android:textSize="14sp"
+            android:fontFamily="@font/iran_sans"
+            android:background="@drawable/background_btn_infringement"/>
+
+        <RelativeLayout
+            android:id="@+id/btnCall"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/background_btn_central"
+            android:clickable="true">
+
+            <ImageView
+                android:id="@+id/img_btn_Call"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/call"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/img_btn_Call"
+                android:text="@string/Call"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp"
+                android:fontFamily="@font/iran_sans"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

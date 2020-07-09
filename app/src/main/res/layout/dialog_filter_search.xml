@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/BackGround"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="0dp"
+    android:clickable="true"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
+    android:background="@color/colorWhite">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="0.5dp"
+                    app:cardUseCompatPadding="false"
+                    android:clipToPadding="false">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPaleBlack"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/SearchFilters"
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/iran_sans"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <EditText
+                    android:id="@+id/txt_MinRights"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:hint="@string/MinRights"
+                    android:textColorHint="@color/colorPaleBlack"
+                    android:textColor="@color/colorBlack"
+                    android:background="@drawable/background_txt_price_filter_search"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:textSize="16sp"
+                    android:inputType="number"
+                    android:fontFamily="@font/iran_sans"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"/>
+
+                <EditText
+                    android:id="@+id/txt_MaxRights"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/MaxRights"
+                    android:textColorHint="@color/colorPaleBlack"
+                    android:textColor="@color/colorBlack"
+                    android:background="@drawable/background_txt_price_filter_search"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:textSize="16sp"
+                    android:inputType="number"
+                    android:fontFamily="@font/iran_sans"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp">
+
+                    <CheckBox
+                        android:id="@+id/chk_FullTime"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/FullTime"
+                        android:textColor="@color/colorPaleBlack"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/iran_sans"/>
+
+                    <CheckBox
+                        android:id="@+id/chk_PartTime"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/PartTime"
+                        android:textColor="@color/colorPaleBlack"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/iran_sans"/>
+
+                    <CheckBox
+                        android:id="@+id/chk_TornTime"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/TornTime"
+                        android:textColor="@color/colorPaleBlack"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/iran_sans"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+                    android:weightSum="3"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/InsuranceHistory"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorPaleBlack"
+                        android:fontFamily="@font/iran_sans"
+                        android:paddingRight="5dp"
+                        android:singleLine="true"/>
+
+                    <RadioGroup
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <RadioButton
+                            android:id="@+id/rdo_IHaveInsuranceHistory"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:text="@string/IHave"
+                            android:textSize="14sp"
+                            android:textColor="@color/colorPaleBlack"
+                            android:fontFamily="@font/iran_sans"/>
+
+                        <RadioButton
+                            android:id="@+id/rdo_IHaveNotInsuranceHistory"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="@string/IHaveNot"
+                            android:textSize="14sp"
+                            android:textColor="@color/colorPaleBlack"
+                            android:fontFamily="@font/iran_sans"/>
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:weightSum="3"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/JobHistory"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorPaleBlack"
+                        android:fontFamily="@font/iran_sans"
+                        android:paddingRight="5dp"
+                        android:singleLine="true"/>
+
+                    <RadioGroup
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <RadioButton
+                            android:id="@+id/rdo_IHaveJobHistory"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:text="@string/IHave"
+                            android:textSize="14sp"
+                            android:textColor="@color/colorPaleBlack"
+                            android:fontFamily="@font/iran_sans"/>
+
+                        <RadioButton
+                            android:id="@+id/rdo_IHaveNotJobHistory"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="@string/IHaveNot"
+                            android:textSize="14sp"
+                            android:textColor="@color/colorPaleBlack"
+                            android:fontFamily="@font/iran_sans"/>
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/Madrak"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorPaleBlack"
+                        android:fontFamily="@font/iran_sans"
+                        android:paddingRight="5dp"
+                        android:gravity="center|right"
+                        android:singleLine="true"/>
+
+                    <Spinner
+                        android:id="@+id/cmb_Madrak"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:spinnerMode="dialog"
+                        android:layoutDirection="rtl"
+                        android:textDirection="rtl"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/Major"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorPaleBlack"
+                        android:fontFamily="@font/iran_sans"
+                        android:paddingRight="5dp"
+                        android:gravity="center|right"
+                        android:singleLine="true"/>
+
+                    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                        android:id="@+id/cmb_Major"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:spinnerMode="dialog"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginTop="20dp">
+
+                    <Button
+                        android:id="@+id/btn_ClearOptions"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/background_btn_white"
+                        android:text="@string/ClearOptions"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/iran_sans"/>
+
+                    <Button
+                        android:id="@+id/btn_Search"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/background_btn_central"
+                        android:text="@string/Search"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/iran_sans"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</RelativeLayout>

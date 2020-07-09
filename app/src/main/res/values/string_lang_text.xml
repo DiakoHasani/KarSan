@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="SearchYourJob">شغل خود را جستجو کنید</string>
+    <string name="YourInternetIsVerySlow">اینترنت شما بسیار کند است</string>
+    <string name="NoData">هیچ داده ای موجود نمی باشد</string>
+    <string name="CheckYourInternet">لطفا اتصال اینترنت خود را چک نمایید</string>
+    <string name="ErrorInPrograme">خطای رخ داده است لطفا مجددا امتحان کنید</string>
+    <string name="InputYourPhoneNumber">شماره موبایل خود را وارد نمایید</string>
+    <string name="InputYourReferenceCode">کد معرف خود را وارد نمایید</string>
+    <string name="InputYourActivationCode">کد فعاسازی خود را وارد نمایید</string>
+    <string name="CreateNewAccount">ایجاد حساب کاربری جدید</string>
+    <string name="RetrySendSMS">ارسال مجدد پیامک</string>
+    <string name="IHaveAccount">حساب کاربری دارم</string>
+    <string name="PleaseInputYourNumberPhone">لطفا شماره موبایل خود را وارد نمایید</string>
+    <string name="PleaseInputYourReferenceCode">لطفا کد معرف خود را وارد نمایید</string>
+    <string name="Text_Sent_Successfully">پیامک با موفقیت ارسال شد</string>
+    <string name="Please_Re_register">لطفا دوباره ثبت نام کنید</string>
+    <string name="Create_An_Account_First">ابتدا یک حساب کاربری ایجاد کنید</string>
+    <string name="Write_Down_Your_Reason_For_Reporting_This_Ad">دلیل خود را از گزارش این آگهی یادداشت کنید</string>
+    <string name="Write_Down_Your_Text">متن خود را یادداشت کنید</string>
+    <string name="Your_Report_Will_Be_Processed_As_Soon_As_Possible">در اسرع وقت به گزارش شما رسیدگی می شود</string>
+    <string name="you_With">شما با شماره موبایل</string>
+    <string name="You_Have_Signed_Up_For_The_Karsan_App">ثبت نام کرده اید</string>
+    <string name="PleaseCreateNewsAccountInApplicationKarsan">لطفا یک حساب کاربری جدید در اپلیکیشن کارسان ایجاد کنید</string>
+    <string name="YourAccount">لطفا یک حساب کاربری جدید در اپلیکیشن کارسان ایجاد کنید</string>
+    <string name="YourAccountHasEncounteredAProblemPleaseEditYourAccount">حساب کاربری شما مشکل پیدا کرده است</string>
+    <string name="TheTypeOfWorkToConsider">نوع کار مدنظر</string>
+    <string name="YourNameMustBeAtMost40CharactersLong">نام شما باید حداکثر 40 کاراکتر باشد</string>
+    <string name="ThisAdWasAddedToTheFavoritesList">این آگهی به لیست مورد علاقه ها اضافه شد</string>
+    <string name="ThisItemHasBeenRemovedFromTheFavoritesList">این آیتم در لیست مورد علاقه ها حذف شد</string>
+    <string name="YouCanSelectedThreeMadrak">شما مجاز به انتخاب کردن سه مدرک تحصیلی می باشید</string>
+    <string name="YouCanSelectedThreeMajor">شما مجاز به انتخاب کردن سه رشته تحصیلی می باشید</string>
+    <string name="NumberOfHoursWorkedPerDay">تعداد ساعت کار در روز</string>
+    <string name="NumberOfHoursWorkedPerDay2">تعداد ساعت کار در روز *</string>
+    <string name="ThisValueMustBeFilled">این مقدار باید پر شود</string>
+    <string name="PleaseSelectedOneJobType">لطفا یک نوع کار را نتخاب کنید</string>
+    <string name="PleaseSelectedOneGender">لطفا جنسیت را وارد نمایید</string>
+    <string name="PleaseSelectedHasInsurance">لطفا بیمه را انتخاب کنید</string>
+    <string name="PleaseSelectedHaveWorkExperience">لطفا سابقه کار را انتخاب کنید</string>
+    <string name="PleaseSelectedJobTime">لطفا زمان کاری را انتخاب کنید</string>
+    <string name="NationalCodeNotValid">کد ملی معتبر نمی باشد</string>
+    <string name="SelectedOneItem">یکی از گزینه های زیر را انتخاب کنید</string>
+    <string name="UndoItem">آیا آگهی بازیابی شود</string>
+    <string name="InputYourPdf">pdf خود را وارد نمایید</string>
+    <string name="InputYourImage">عکس خود را وارد نمایید</string>
+    <string name="PleaseInputOnePDF">لطفا رزومه خود را وارد نمایید</string>
+    <string name="PleaseCompleteYourProfileRatherThanYourResumeUseItEffectively">لطفا پروفایل خود را تکمیل نمایید تا از رزومه شما به نحو احسن استفاده شود</string>
+    <string name="title_choose_file">رزومه خود را انتخاب کنید</string>
+    <string name="YouDontWriteCV">شما هیچ رزومه ای ندارید</string>
+    <string name="ErrorDuringOperationPleaseTryAgain">خطای در عملیات رخ داده است لطفا مجددا امتحان کنید</string>
+    <string name="ChargeWalletKarsan">شارژ کیف پول کارسان</string>
+    <string name="ErrorInOperationCallCenterToFollowUp">خطای در عملیات رخ داده است برای پیگیری با مرکز تماس بگیرید</string>
+    <string name="ErrorInPaymentGateway">در درگاه پرداخت خطای رخ داده است و پول شما پرداخت نشده است</string>
+    <string name="YourWalletBalanceIsNotEnoughToDownload">موجودی کیف پول شما برای دانلود کافی نمی باشد</string>
+    <string name="TheMinimumSalaryMustBeGreaterThanTheMaximumSalary">باید حداکثر حقوق بزرگتر از حداقل حقوق باشد</string>
+    <string name="TextCallMe">تماس با واحد پشتیبانی: 08733162206</string>
+    <string name="TextCallMe2">ما را در شبکه های اجتماعی دنبال کنید</string>
+    <string name="TextCallMe3">با دنبال کردن کارسان در شبکه های اجتماعی می توانید از آخرین اخبار و اطلاعیه های کاریابی مطلع شوید</string>
+    <string name="TextNationalCode">لینک دعوت و کد معرف خود را برای دوستانتان ارسال کنید تا امتیازات خود را بالا ببرید واز جوایز کارسان برخوردار شوید</string>
+    <string name="TextNewVersionApp">خبر خوش نسخه جدید کارسان رسید و باید اپلیکیشن خود را آپدیت کنید</string>
+    <string name="TextNewVersionApp2">خبر خوش نسخه جدید کارسان رسید و اگر دوست دارید نسخه خود را آپدیت کنید</string>
+    <string name="ReadMoreNewsKarsan">در اپلیکیشن کارسان می توانید ادامه خبر را ببینید</string>
+    <string name="ErrorInServer">در سرور خطای رخ داده است</string>
+    <string name="PleaseCheckedYourConnectionInternet">لطفا اتصال اینترنت خود را چک نمایید</string>
+    <string name="ErrorInApplication">در برنامه خطای رخ داده است</string>
+    <string name="ChoseApp">یک برنامه انتخاب کنید</string>
+    <string name="notFoundThisPDF">این کتاب در گوشی شما یافت نشد</string>
+
+
+
+
+    <string name="TextRules_And_Support">
+        ۱.آگهی دهنده با ثبت آگهی در کارسان تایید می نماید که آگهی ایشان شامل مواردی که در ادامه خواهد آورده شد نخواهد بود:\n
+*مغایرت با قواتین جمهوری اسلامی ایران و عرف جامعه\n
+*هرگونه محتوی مندرج در مصادیق محتوی مجرمانه\n
+*استفاده ابزاری از تصاویر اشخاص در آگهی\n
+*هرگونه آگهی و خبرپراکنی سیاسی،اجتماعی و مذهبی که جنبه تجاری نداشته باشد\n
+*برنامه ها و روش های عبور از فیلترینگ و خدمات مربوط به نصب ماهواره و اینترنت ماهواره ای\n
+*فروش برنامه‌های نرم‌افزاری یا کتاب‌های فاقد مجوز قانونی برای انتشار و سایر موارد ناقض «قانون حمایت حقوق مؤلفان و مصنفان و هنرمندان»\n
+*شبکه‌های هرمی و فعالیت‌های غیرقانونی و غیرمجاز اقتصادی مشابه،\n
+*هر شکلی از شرط‌بندی (با جایزه یا بدون جایزه)،\n
+*خدمات و کالاهایی که شائبه کلاهبرداری در آن مشاهده شود،\n
+*هرگونه سوءاستفاده از شماره تلفن همراه یا نشانی پست الکترون\n
+
+        چنانچه از ناحیه مراجع ذیصلاح قانونی دستور حذف آگهی صادر شده باشد، کارسان فوراً اقدام به حذف آگهی می‌نماید. همچنین در صورتی که گزارش تخلف کاربران نسبت به آگهی بیشتر از 5 مورد باشد، کارسان به صلاحدید خود ممکن است اقدام به حذف آگهی نماید. در دو فرض اخیر کارسان هیچ‌گونه مسئولیتی در قبال بازپرداخت هزینه‌های پرداختی بابت آگهی حذف شده به کاربر ندارد\n
+
+        ۳.در نظر داشته باشید، به منظور تسهیل و تسریع فرآیند انتشار آگهی‌ها، کارسان ممکن است در مواردی بر اساس قوانین، متن یا عنوان آگهی شما را به طور جزئی تغییر دهد. همچنین کارسان مجاز است هرگونه پیام، آگهی و یا عکسی که به این سایت ارسال می‌کنید یا هر حساب کاربری و اطلاعات دیگری که مربوط به شما یا ایجاد شده توسط شما باشد را هر زمان و به هر شکلی که ضروری بداند حذف نماید.\n
+
+        شرایط مشاهده و استفاده از آگهی‌ها\n
+
+هرگونه استفاده از کارسان به معنی پذیرفتن شرایط مندرج در این سایت است. کارسان هیچ توافقی با کاربران خارج از این شرایط ندارد. شرایط زیر مربوط به کسانی است که به هر شکلی از آگهی‌های منتشر شده‌ٔ کارسان استفاده می‌کنند.\n
+
+تلاش کارسان، نشر آگهی‌ها با اطلاعات صحیح و درست است اما نمی‌تواند صحت آگهی‌ها را تضمین نماید و هیچ‌گونه تعهد یا مسئولیتی در قبال آگهی‌ها برعهده نمی‌گیرد.\n
+
+مسئولیت استفاده از آگهی‌های این سایت بر عهدهٔ شماست و کارسان هیچ تعهدى در قبال خسارات مستقیم، اتفاقى، تبعى، غیرمستقیم و کیفرى، ناشى از دسترسى و استفادهٔ شما از این سایت ندارد.\n
+
+کارسان هیچ قرارداد، تعهدنامه یا سندی را با آگهی‌دهندگان حقیقی یا حقوقی منعقد نمی‌کند. کاربرانِ کارسان در هر لحظه قادر به ویرایش آگهی خود هستند، بنابراین کارسان، هیچ‌گونه مسئولیتی را در \n
+    </string>
+</resources>

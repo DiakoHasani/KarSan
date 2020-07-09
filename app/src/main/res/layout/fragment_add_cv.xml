@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
+    android:background="@color/colorWhite"
+    android:clickable="true">
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!--بخش مربوط یه تولبار-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:cardElevation="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorActionBar"
+                    android:orientation="horizontal"
+                    android:weightSum="6">
+
+                    <LinearLayout
+                        android:id="@+id/Back"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:weightSum="3"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:paddingRight="5dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true">
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/back"
+                            android:layout_weight="1"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:text="@string/Back"
+                            android:textSize="14sp"
+                            android:textColor="@color/colorBlack"
+                            android:fontFamily="@font/iran_sans"
+                            android:gravity="center|right"
+                            android:paddingRight="2dp"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/Loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/iran_sans"
+                    android:textColor="@color/colorBlack"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:lineSpacingExtra="10dp"
+                    android:text="@string/PleaseCompleteYourProfileRatherThanYourResumeUseItEffectively"/>
+
+
+                <LinearLayout
+                    android:id="@+id/Upload"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="50dp"
+                    android:weightSum="12"
+                    android:layoutDirection="ltr"
+                    android:textDirection="ltr"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/border_cv"
+                    android:padding="5dp">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:src="@drawable/pdf"/>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="10">
+
+                        <TextView
+                            android:id="@+id/lbl_CV"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textDirection="rtl"
+                            android:layoutDirection="rtl"
+                            android:singleLine="true"
+                            android:paddingLeft="5dp"
+                            android:text="@string/InputYourPdf"
+                            android:fontFamily="@font/iran_sans"
+                            android:textSize="16sp"
+                            android:textColor="@color/colorBlack"
+                            android:gravity="center_vertical"
+                            android:paddingTop="2dp"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="60dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iran_sans"
+                        android:textSize="16sp"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="5dp"
+                        android:textColor="@color/colorBlack"
+                        android:text="@string/InputYourImage"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iran_sans"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorBlack"
+                        android:text="("/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iran_sans"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorBlack"
+                        android:text="@string/Optional"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iran_sans"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorBlack"
+                        android:text=")"/>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/img_ClearImage"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="40dp"
+                    android:src="@drawable/close_login"
+                    android:layout_marginTop="20dp"
+                    android:padding="5dp"
+                    android:background="?attr/selectableItemBackground"/>
+
+                <ImageView
+                    android:id="@+id/image_item"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/add_image"
+                    android:scaleType="fitXY"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:tag="default"/>
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_Add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/background_btn_central"
+        android:text="@string/AddCV"
+        android:textColor="@color/colorWhite"
+        android:fontFamily="@font/iran_sans"
+        android:textSize="14sp"/>
+
+</RelativeLayout>

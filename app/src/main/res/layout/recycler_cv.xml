@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:textDirection="rtl"
+    android:layoutDirection="rtl"
+    android:background="@color/colorActionBar"
+    android:layout_marginBottom="5dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
+    app:cardElevation="1dp">
+
+    <LinearLayout
+        android:id="@+id/Layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="6"
+        android:clickable="true"
+        android:background="?attr/selectableItemBackground"
+        android:paddingRight="2dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/lbl_FullName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/colorBlack"
+                android:gravity="right"
+                android:layout_marginTop="5dp"
+                android:paddingRight="10dp"
+                android:fontFamily="@font/iran_sans"
+                android:text="@string/Loading"
+                android:background="@color/colorGray"/>
+
+            <TextView
+                android:id="@+id/lbl_Madrak"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/colorBlack"
+                android:gravity="right"
+                android:layout_marginTop="10dp"
+                android:paddingRight="10dp"
+                android:fontFamily="@font/iran_sans"
+                android:text="@string/PleaseWait"
+                android:background="@color/colorGray"/>
+
+            <TextView
+                android:id="@+id/lbl_Major"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/colorBlack"
+                android:gravity="right"
+                android:layout_marginTop="10dp"
+                android:paddingRight="10dp"
+                android:fontFamily="@font/iran_sans"
+                android:layout_marginBottom="5dp"
+                android:background="@color/colorGray"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            android:weightSum="10">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/cv_holder"
+                    app:civ_border_width="0.5dp"
+                    app:civ_border_color="@color/colorPaleBlack"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

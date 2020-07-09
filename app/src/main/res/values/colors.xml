@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#0055a5</color>
+    <color name="colorPrimaryDark">#0055a5</color>
+    <color name="colorAccent">#0055a5</color>
+    <color name="colorActionBar">#FCFCFC</color>
+    <color name="colorActionBar2">#F9F9F9</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorBackGroundCV">#F7F7F7</color>
+    <color name="colorCentral">#0055a5</color>
+    <color name="colorGray">#DDDDDD</color>
+    <color name="colorLowBlue">#3374b1</color>
+    <color name="colorPaleBlack">#535353</color>
+    <color name="colorRed">#C00000</color>
+    <color name="colorLowBlack">#99000000</color>
+    <color name="colorLowBlack2">#ABABAB</color>
+    <color name="colorYellow">#FBFF00</color>
+    <color name="colorTelegram">#29A0DA</color>
+    <color name="colorInstagram">#F56C3B</color>
+    <color name="colorWhatsApp">#23A416</color>
+    <color name="colorLowRed">#B13333</color>
+    <color name="colorBackgroundDialog">#52232F34</color>
+</resources>

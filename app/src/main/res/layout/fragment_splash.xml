@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back_ground_splash">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="9">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:orientation="vertical"
+            android:paddingRight="50dp"
+            android:paddingLeft="50dp"
+            android:paddingTop="50dp"
+            android:paddingBottom="40dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3">
+
+                <ImageView
+                    android:id="@+id/img_logo"
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/logo_karsan"
+                    android:visibility="invisible"
+                    android:layout_centerInParent="true"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/lbl_KarSan"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/KarSan"
+                android:textColor="@color/colorWhite"
+                android:gravity="center"
+                android:textSize="22sp"
+                android:fontFamily="@font/iran_sans"
+                android:layout_marginTop="15dp"
+                android:visibility="invisible"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:theme="@style/ProgressBarTheme"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:id="@+id/img_Reload"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/reload"
+                android:clickable="true"
+                android:background="?attr/selectableItemBackground"
+                android:visibility="invisible"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

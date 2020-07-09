@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/Layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
+    android:paddingRight="5dp"
+    android:paddingLeft="5dp"
+    android:layout_marginBottom="10dp"
+    app:cardElevation="1dp"
+    app:cardBackgroundColor="@color/colorWhite"
+    android:foreground="?attr/selectableItemBackground"
+    android:clickable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="12">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/lbl_Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:textColor="@color/colorBlack"
+                android:text="@string/Loading"
+                android:layout_marginTop="5dp"
+                android:singleLine="true"
+                android:fontFamily="@font/iran_sans"
+                android:background="@color/colorGray"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp"/>
+
+            <TextView
+                android:id="@+id/lbl_Price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="12sp"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:text="@string/PleaseWait"
+                android:gravity="center"
+                android:fontFamily="@font/iran_sans"
+                android:background="@color/colorGray"/>
+
+            <TextView
+                android:id="@+id/lbl_Time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/colorBlack"
+                android:textSize="10sp"
+                android:paddingRight="5dp"
+                android:singleLine="true"
+                android:layout_marginBottom="2dp"
+                android:fontFamily="@font/iran_sans"
+                android:background="@color/colorGray"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4">
+
+            <ImageView
+                android:id="@+id/image_Item"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/image_item_loading"/>
+
+            <TextView
+                android:id="@+id/lbl_Type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:textColor="@color/colorWhite"
+                android:background="@color/colorRed"
+                android:fontFamily="@font/iran_sans"
+                android:gravity="center"
+                android:paddingTop="1dp"
+                android:paddingBottom="1dp"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

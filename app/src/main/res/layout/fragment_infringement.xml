@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:textDirection="rtl"
+    android:layoutDirection="rtl"
+    android:background="@color/colorWhite"
+    android:clickable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--بخش مربوط یه تولبار-->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:cardElevation="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorActionBar"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <LinearLayout
+                    android:id="@+id/Back"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:weightSum="3"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="5dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/back"
+                        android:layout_weight="1"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:text="@string/Back"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorBlack"
+                        android:fontFamily="@font/iran_sans"
+                        android:gravity="center|right"
+                        android:paddingRight="2dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/iran_sans"
+            android:textColor="@color/colorBlack"
+            android:textSize="14sp"
+            android:layout_marginTop="30dp"
+            android:gravity="right"
+            android:text="@string/Write_Down_Your_Reason_For_Reporting_This_Ad"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"/>
+
+        <EditText
+            android:id="@+id/txt_Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:lines="5"
+            android:background="@drawable/background_txt_infringement"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:hint="@string/Write_Down_Your_Text"
+            android:textColorHint="@color/colorPaleBlack"
+            android:textColor="@color/colorPaleBlack"
+            android:fontFamily="@font/iran_sans"
+            android:gravity="right"
+            android:padding="5dp"
+            android:textSize="14sp"
+            android:layout_marginBottom="10dp"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_Report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/background_btn_central"
+        android:text="@string/Report"
+        android:textColor="@color/colorWhite"
+        android:fontFamily="@font/iran_sans"
+        android:textSize="14sp"/>
+
+    <RelativeLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackgroundDialog"
+        android:clickable="true"
+        android:visibility="gone">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            app:cardCornerRadius="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ProgressBar
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerInParent="true"/>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+</RelativeLayout>

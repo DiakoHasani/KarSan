@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl"
+    android:background="@color/colorBackGroundCV"
+    android:clickable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!--بخش مربوط یه تولبار-->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:cardElevation="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorActionBar"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <LinearLayout
+                    android:id="@+id/Back"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:weightSum="3"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="5dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/back"
+                        android:layout_weight="1"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:text="@string/Back"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorBlack"
+                        android:fontFamily="@font/iran_sans"
+                        android:gravity="center|right"
+                        android:paddingRight="2dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="12">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3.2">
+
+                <ImageView
+                    android:id="@+id/img_BackGround"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:alpha="0.1"
+                    android:scaleType="fitXY"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:weightSum="10"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="7"
+                        android:layout_marginRight="80dp"
+                        android:layout_marginLeft="80dp"
+                        app:cardElevation="4dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardPreventCornerOverlap="false"
+                        app:cardUseCompatPadding="false"
+                        app:cardBackgroundColor="@android:color/transparent">
+
+                        <ImageView
+                            android:id="@+id/img_cv"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitXY"/>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2">
+
+                        <TextView
+                            android:id="@+id/lbl_Date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:fontFamily="@font/iran_sans"
+                            android:textSize="12dp"
+                            android:gravity="center"
+                            android:textColor="@color/colorBlack"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.25"/>
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/Loading"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="7"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardBackgroundColor="@color/colorWhite"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:weightSum="20"
+                        android:paddingRight="2dp"
+                        android:paddingLeft="2dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="2"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/user"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginRight="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Name"
+                                android:gravity="center"
+                                android:textColor="@color/colorBlack"
+                                android:fontFamily="@font/iran_sans"
+                                android:textSize="14dp"
+                                android:layout_marginRight="8dp"/>
+
+                            <TextView
+                                android:id="@+id/lbl_Name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/iran_sans"
+                                android:textSize="14dp"
+                                android:gravity="center"
+                                android:textColor="@color/colorBlack"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="2"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/major"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginRight="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Major2"
+                                android:gravity="center"
+                                android:textColor="@color/colorBlack"
+                                android:fontFamily="@font/iran_sans"
+                                android:textSize="14dp"
+                                android:layout_marginRight="8dp"/>
+
+                            <TextView
+                                android:id="@+id/lbl_Major"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/iran_sans"
+                                android:textSize="14dp"
+                                android:gravity="center"
+                                android:textColor="@color/colorBlack"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="2"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/college"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginRight="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Madrak3"
+                                android:gravity="center"
+                                android:textColor="@color/colorBlack"
+                                android:fontFamily="@font/iran_sans"
+                                android:textSize="14dp"
+                                android:layout_marginRight="8dp"/>
+
+                            <TextView
+                                android:id="@+id/lbl_Madrak"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/iran_sans"
+                                android:textSize="14dp"
+                                android:gravity="center"
+                                android:textColor="@color/colorBlack"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="2"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/car"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginRight="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Certificates2"
+                                android:gravity="center"
+                                android:textColor="@color/colorBlack"
+                                android:fontFamily="@font/iran_sans"
+                                android:textSize="14dp"
+                                android:layout_marginRight="8dp"/>
+
+                            <TextView
+                                android:id="@+id/lbl_Certificate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/iran_sans"
+                                android:textSize="14dp"
+                                android:gravity="center"
+                                android:textColor="@color/colorBlack"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="2"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/papers"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginRight="8dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/Insurances2"
+                                android:gravity="center"
+                                android:textColor="@color/colorBlack"
+                                android:fontFamily="@font/iran_sans"
+                                android:textSize="14dp"
+                                android:layout_marginRight="8dp"/>
+
+                            <TextView
+                                android:id="@+id/lbl_Insurance"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginRight="5dp"
+                                android:fontFamily="@font/iran_sans"
+                                android:textSize="14dp"
+                                android:gravity="center"
+                                android:textColor="@color/colorBlack"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="2"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/toilet"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginRight="8dp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="@string/Gender"
+                                    android:gravity="center"
+                                    android:textColor="@color/colorBlack"
+                                    android:fontFamily="@font/iran_sans"
+                                    android:textSize="14dp"
+                                    android:layout_marginRight="8dp"/>
+
+                                <TextView
+                                    android:id="@+id/lbl_Gender"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginRight="5dp"
+                                    android:fontFamily="@font/iran_sans"
+                                    android:textSize="14dp"
+                                    android:gravity="center"
+                                    android:textColor="@color/colorBlack" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="@string/Birth"
+                                    android:gravity="center"
+                                    android:textColor="@color/colorBlack"
+                                    android:fontFamily="@font/iran_sans"
+                                    android:textSize="14dp"/>
+
+                                <TextView
+                                    android:id="@+id/lbl_DateBirth"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginRight="5dp"
+                                    android:fontFamily="@font/iran_sans"
+                                    android:textSize="14dp"
+                                    android:gravity="center"
+                                    android:textColor="@color/colorBlack" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_Download"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/background_btn_central"
+        android:text="@string/DownloadCV"
+        android:textColor="@color/colorWhite"
+        android:fontFamily="@font/iran_sans"
+        android:textSize="14sp"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:id="@+id/CanSeeCV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/btn_Call"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/Call"
+            android:textColor="@color/colorBlack"
+            android:textSize="14sp"
+            android:fontFamily="@font/iran_sans"
+            android:background="@drawable/background_btn_infringement"/>
+
+        <Button
+            android:id="@+id/btn_ShowCv"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/background_btn_central"
+            android:text="@string/SeeCV"
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp"
+            android:fontFamily="@font/iran_sans"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

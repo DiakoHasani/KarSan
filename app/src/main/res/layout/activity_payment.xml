@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl">
+
+    <RelativeLayout
+        android:id="@+id/Loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/loading_wallet" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/ShowPleaseWait"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="120dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/iran_sans"
+                android:gravity="center"
+                android:text="@string/PleaseWait"
+                android:textColor="@color/colorCentral"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/Error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:weightSum="3">
+
+            <pl.droidsonroids.gif.GifImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:src="@drawable/gif_call"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:fontFamily="@font/iran_sans"
+                android:textSize="12sp"
+                android:textColor="@color/colorCentral"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="@string/ErrorInOperationCallCenterToFollowUp"></TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true">
+
+            <Button
+                android:id="@+id/btn_SMS"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/SMS"
+                android:textColor="@color/colorBlack"
+                android:textSize="14sp"
+                android:fontFamily="@font/iran_sans"
+                android:background="@drawable/background_btn_infringement"/>
+
+            <RelativeLayout
+                android:id="@+id/btnCall"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/background_btn_central"
+                android:clickable="true">
+
+                <ImageView
+                    android:id="@+id/img_btn_Call"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/call"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/img_btn_Call"
+                    android:text="@string/Call"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/iran_sans"
+                    android:gravity="center"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ErrorWallet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/error_wallet"
+            android:layout_centerInParent="true"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ErrorInPaymentGateway"
+            android:layout_alignParentBottom="true"
+            android:textSize="12sp"
+            android:textColor="@color/colorCentral"
+            android:fontFamily="@font/iran_sans"
+            android:gravity="center"
+            android:layout_marginBottom="130dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/NoInternet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone">
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/Shimmer_No_Internet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/img_No_Internet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/no_internet" />
+
+                <TextView
+                    android:id="@+id/lbl_CheckInternet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/img_No_Internet"
+                    android:text="@string/CheckYourInternet"
+                    android:textColor="@color/colorBlack"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:layout_marginTop="5dp"/>
+
+            </RelativeLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <TextView
+            android:id="@+id/lbl_TryingAgain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Shimmer_No_Internet"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            android:textColor="@color/colorPaleBlack"
+            android:gravity="center"
+            android:text="@string/TryingAgain"
+            android:clickable="true"
+            android:padding="5dp"
+            android:background="?android:attr/selectableItemBackground"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ErrorPayment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/payment_error"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:fontFamily="@font/iran_sans"
+            android:textColor="@color/colorCentral"
+            android:textSize="22sp"
+            android:text="@string/TransactionUnsuccessful"
+            android:gravity="center"
+            android:layout_marginBottom="120dp"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

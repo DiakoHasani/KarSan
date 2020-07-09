@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl">
+
+    <FrameLayout
+        android:id="@+id/Frame_Main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="35dp"
+        android:layout_marginStart="0dp"/>
+
+    <!--بخش مربوط به باتوم بار پروژه-->
+    <LinearLayout
+        android:id="@+id/BottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:padding="0dp"
+        android:layout_margin="0dp"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/colorGray"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorActionBar"
+            android:orientation="horizontal"
+            android:paddingBottom="2dp"
+            android:weightSum="5">
+            <ImageView
+                android:id="@+id/BottomBar_Home"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/home"
+                android:padding="5dp"/>
+
+            <ImageView
+                android:id="@+id/BottomBar_News"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/news"
+                android:padding="5dp"/>
+
+            <ImageView
+                android:id="@+id/BottomBar_Add"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/add_item"
+                android:padding="7dp"/>
+
+            <ImageView
+                android:id="@+id/BottomBar_CV"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/cv"
+                android:padding="5dp"/>
+
+            <ImageView
+                android:id="@+id/BottomBar_Profile"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/profile"
+                android:padding="5dp"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorWhite"
+    android:clickable="true"
+    android:layoutDirection="rtl"
+    android:textDirection="rtl">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/background_my_cv">
+
+        <!--بخش مربوط یه تولبار-->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardElevation="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <LinearLayout
+                    android:id="@+id/Back"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:weightSum="3"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="5dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/back"
+                        android:layout_weight="1"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:text="@string/Back"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorBlack"
+                        android:fontFamily="@font/iran_sans"
+                        android:gravity="center|right"
+                        android:paddingRight="2dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/Loading"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iran_sans"
+                        android:textColor="@color/colorBlack"
+                        android:layout_marginTop="20dp"
+                        android:textSize="22sp"
+                        android:gravity="center"
+                        android:text="@string/MyCv"/>
+
+                    <TextView
+                        android:id="@+id/lbl_DateInsert"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iran_sans"
+                        android:layout_marginTop="15dp"
+                        android:gravity="center"
+                        android:textSize="12dp"
+                        android:textColor="@color/colorCentral"/>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/ShowCv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginLeft="40dp"
+                        app:cardBackgroundColor="#aa0055a5"
+                        app:cardCornerRadius="5dp"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardElevation="0dp"
+                        android:clickable="true"
+                        app:cardPreventCornerOverlap="false"
+                        app:cardUseCompatPadding="false">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/iran_sans"
+                            android:textColor="@color/colorWhite"
+                            android:gravity="center"
+                            android:textSize="14sp"
+                            android:text="@string/SeeResume"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"/>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/DeleteCv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginLeft="40dp"
+                        app:cardBackgroundColor="#aaA50000"
+                        app:cardCornerRadius="5dp"
+                        android:theme="@style/AppTheme.MyRipple2"
+                        app:cardElevation="0dp"
+                        android:clickable="true">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/iran_sans"
+                            android:textColor="@color/colorWhite"
+                            android:gravity="center"
+                            android:textSize="14sp"
+                            android:text="@string/RemoveResume"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"/>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="40dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/iran_sans"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="14sp"
+                            android:layout_marginRight="10dp"
+                            android:text="@string/FullName2"/>
+
+                        <TextView
+                            android:id="@+id/lbl_FullName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/iran_sans"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="14sp"
+                            android:paddingRight="5dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/iran_sans"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="14sp"
+                            android:layout_marginRight="10dp"
+                            android:text="@string/Major2"/>
+
+                        <TextView
+                            android:id="@+id/lbl_Major"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/iran_sans"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="14sp"
+                            android:paddingRight="5dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20dp"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/iran_sans"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="14sp"
+                                android:layout_marginRight="10dp"
+                                android:text="@string/Madrak4"/>
+
+                            <TextView
+                                android:id="@+id/lbl_Madrak"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/iran_sans"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="14sp"
+                                android:paddingRight="5dp"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/iran_sans"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="14sp"
+                                android:layout_marginRight="10dp"
+                                android:text="@string/Certificates2"/>
+
+                            <TextView
+                                android:id="@+id/lbl_Certificate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/iran_sans"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="14sp"
+                                android:paddingRight="5dp"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20dp"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/iran_sans"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="14sp"
+                                android:layout_marginRight="10dp"
+                                android:text="@string/CellPhone"/>
+
+                            <TextView
+                                android:id="@+id/lbl_CellPhone"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/iran_sans"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="14sp"
+                                android:paddingRight="5dp"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/iran_sans"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="14sp"
+                                android:layout_marginRight="10dp"
+                                android:text="@string/Gender"/>
+
+                            <TextView
+                                android:id="@+id/lbl_Gender"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/iran_sans"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="14sp"
+                                android:paddingRight="5dp"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+</RelativeLayout>
