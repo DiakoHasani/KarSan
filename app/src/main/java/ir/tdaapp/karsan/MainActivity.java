@@ -603,7 +603,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    boolean UseSearched(){
+    public boolean UseSearched(){
 
         boolean val=false;
 

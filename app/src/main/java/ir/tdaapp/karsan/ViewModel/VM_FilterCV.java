@@ -12,10 +12,10 @@ public class VM_FilterCV {
         majorId = 0;
         insuranceId = 0;
         genderId = 0;
-        base1 = true;
-        base2 = true;
-        base3 = true;
-        special = true;
+        base1 = false;
+        base2 = false;
+        base3 = false;
+        special = false;
         motorcycle = false;
     }
 
@@ -90,4 +90,47 @@ public class VM_FilterCV {
     public void setMotorcycle(boolean motorcycle) {
         this.motorcycle = motorcycle;
     }
+
+    public boolean isEnableSearch() {
+        boolean val = false;
+
+        if (madrakId != 0) {
+            val = true;
+        }
+
+        if (majorId != 0) {
+            val = true;
+        }
+
+        if (insuranceId != 0) {
+            val = true;
+        }
+
+        if (genderId != 0) {
+            val = true;
+        }
+
+        if (base1) {
+            val = true;
+        }
+
+        if (base2) {
+            val = true;
+        }
+
+        if (base3) {
+            val = true;
+        }
+
+        if (special) {
+            val = true;
+        }
+
+        if (motorcycle) {
+            val = true;
+        }
+
+        return val;
+    }
+
 }

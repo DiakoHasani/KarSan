@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -71,6 +72,7 @@ import ir.tdaapp.karsan.DataBase.Tbl_User;
 import ir.tdaapp.karsan.Enum.Gender;
 import ir.tdaapp.karsan.MainActivity;
 import ir.tdaapp.karsan.R;
+import ir.tdaapp.karsan.Services.onClickDialog_Confirm;
 import ir.tdaapp.karsan.Utility.AppController;
 import ir.tdaapp.karsan.Utility.Base64Image;
 import ir.tdaapp.karsan.Utility.BaseFragment;
@@ -82,13 +84,14 @@ import ir.tdaapp.karsan.ViewModel.VM_Gender;
 import ir.tdaapp.karsan.ViewModel.VM_Job;
 import ir.tdaapp.karsan.ViewModel.VM_Madrak;
 import ir.tdaapp.karsan.ViewModel.VM_Major;
+import ir.tdaapp.karsan.Views.Dialog.Dialog_Confirm;
 
 import static android.app.Activity.RESULT_OK;
 import static androidx.core.content.FileProvider.getUriForFile;
 
 public class Fragment_Add_Item extends BaseFragment implements View.OnClickListener {
 
-    public final static String TAG="Fragment_Add_Item";
+    public final static String TAG = "Fragment_Add_Item";
 
     Spinner cmb_Madrak, cmb_Major, cmb_JobType, cmb_Gender;
     Tbl_Madrak tbl_madrak;
@@ -97,18 +100,19 @@ public class Fragment_Add_Item extends BaseFragment implements View.OnClickListe
     Tbl_User tbl_user;
     EditText txt_NationalCode, txt_MinPrice, txt_MaxPrice;
     CompressImage compressImage;
-    ImageView image_item,img_ClearImage;
+    ImageView image_item, img_ClearImage;
     RecyclerView RecyclerMajors, RecyclerMadraks;
     MajorAdapter majorAdapter;
     GridLayoutManager gridLayoutManager, gridLayoutManager2;
     MadrakAdapter madrakAdapter;
-    EditText txt_Title, txt_WorkingTime, txt_HoursOfWork, txt_Description,txt_Age;
+    EditText txt_Title, txt_WorkingTime, txt_HoursOfWork, txt_Description, txt_Age;
     RadioButton rdo_NoInsurance, rdo_YesInsurance, rdo_HaveNotWorkExperience, rdo_HaveWorkExperience;
     RadioButton rdo_TornTime, rdo_PartTime, rdo_FullTime;
     Button btn_ClearOptions, btn_Record;
     JsonObjectRequest PostRquest;
     LinearLayout Back;
     RequestQueue requestQueue;
+    RadioGroup PartTimeGroup, HaveWorkExperienceGroup, InsuranceGroups;
 
     @Nullable
     @Override
@@ -141,7 +145,7 @@ public class Fragment_Add_Item extends BaseFragment implements View.OnClickListe
 
         requestQueue = Volley.newRequestQueue(getContext());
 
-        if (PostRquest!=null){
+        if (PostRquest != null) {
             PostRquest.setTag(TAG);
             requestQueue.add(PostRquest);
         }
@@ -169,7 +173,7 @@ public class Fragment_Add_Item extends BaseFragment implements View.OnClickListe
         txt_Age = view.findViewById(R.id.txt_Age);
         cmb_Major = view.findViewById(R.id.cmb_Major);
 
-        cmb_JobType =(Spinner) view.findViewById(R.id.spinner_search);
+        cmb_JobType = (Spinner) view.findViewById(R.id.spinner_search);
 
         cmb_Gender = view.findViewById(R.id.cmb_Gender);
         txt_NationalCode = view.findViewById(R.id.txt_NationalCode);
@@ -190,7 +194,10 @@ public class Fragment_Add_Item extends BaseFragment implements View.OnClickListe
         madrakAdapter = new MadrakAdapter(getContext());
         gridLayoutManager = new GridLayoutManager(getContext(), 1, RecyclerView.HORIZONTAL, false);
         gridLayoutManager2 = new GridLayoutManager(getContext(), 1, RecyclerView.HORIZONTAL, false);
-        img_ClearImage=view.findViewById(R.id.img_ClearImage);
+        img_ClearImage = view.findViewById(R.id.img_ClearImage);
+        InsuranceGroups = view.findViewById(R.id.InsuranceGroups);
+        HaveWorkExperienceGroup = view.findViewById(R.id.HaveWorkExperienceGroup);
+        PartTimeGroup = view.findViewById(R.id.PartTimeGroup);
     }
 
     void SetSpinner() {
@@ -523,11 +530,11 @@ public class Fragment_Add_Item extends BaseFragment implements View.OnClickListe
 
 
         //در اینجا چک می شود حداقل حقوق بزرگتر از حداکثر حقوق باشد
-        if (!txt_MinPrice.getText().toString().equalsIgnoreCase("")){
-            long minPrice=Long.valueOf(Replace.txt_Price(txt_MinPrice.getText().toString()));
-            long maxPrice=Long.valueOf(Replace.txt_Price(txt_MaxPrice.getText().toString()));
+        if (!txt_MinPrice.getText().toString().equalsIgnoreCase("")) {
+            long minPrice = Long.valueOf(Replace.txt_Price(txt_MinPrice.getText().toString()));
+            long maxPrice = Long.valueOf(Replace.txt_Price(txt_MaxPrice.getText().toString()));
 
-            if (minPrice>=maxPrice){
+            if (minPrice >= maxPrice) {
                 txt_MinPrice.setError(getResources().getString(R.string.TheMinimumSalaryMustBeGreaterThanTheMaximumSalary));
                 return false;
             }
@@ -581,173 +588,185 @@ public class Fragment_Add_Item extends BaseFragment implements View.OnClickListe
     //در اینجا آیتم اضافه می شود
     void AddItem() {
 
-        final ProgressDialog progress = new ProgressDialog(getActivity());
-        progress.setTitle((Html.fromHtml("<font color='#FF7F27'>"+getResources().getString(R.string.Sending)+"</font>")));
-        progress.setMessage((Html.fromHtml("<font color='#FF7F27'>"+getResources().getString(R.string.PleaseWait)+"</font>")));
-        progress.show();
+        Dialog_Confirm dialog_confirm=new Dialog_Confirm(getString(R.string.The_amount_of_5000_Tomans_will_be_deducted_from_your_wallet), new onClickDialog_Confirm() {
+            @Override
+            public void ok() {
+                final ProgressDialog progress = new ProgressDialog(getActivity());
+                progress.setTitle((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.Sending) + "</font>")));
+                progress.setMessage((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.PleaseWait) + "</font>")));
+                progress.show();
 
-        String Title = txt_Title.getText().toString();
-        String WorkingTime = txt_WorkingTime.getText().toString();
-        String NationalCode = Replace.Number_fn_To_en(txt_NationalCode.getText().toString());
-        String Age = txt_Age.getText().toString();
-        String HoursOfWork = txt_HoursOfWork.getText().toString();
+                String Title = txt_Title.getText().toString();
+                String WorkingTime = txt_WorkingTime.getText().toString();
+                String NationalCode = Replace.Number_fn_To_en(txt_NationalCode.getText().toString());
+                String Age = txt_Age.getText().toString();
+                String HoursOfWork = txt_HoursOfWork.getText().toString();
 
 
-        String MaxPrice = Replace.Number_fn_To_en(Replace.txt_Price(txt_MaxPrice.getText().toString().replace(",","").replace("٬","")));
-        String MinPrice = Replace.Number_fn_To_en(Replace.txt_Price(txt_MinPrice.getText().toString().replace(",","").replace("٬","")));
+                String MaxPrice = Replace.Number_fn_To_en(Replace.txt_Price(txt_MaxPrice.getText().toString().replace(",", "").replace("٬", "")));
+                String MinPrice = Replace.Number_fn_To_en(Replace.txt_Price(txt_MinPrice.getText().toString().replace(",", "").replace("٬", "")));
 
 
-        String Description = txt_Description.getText().toString();
-        String UniCode = tbl_user.GetUniCode();
+                String Description = txt_Description.getText().toString();
+                String UniCode = tbl_user.GetUniCode();
 
-        //در اینجا مدارک تحصیلی ست می شود
-        List<Integer> MadrakIds = madrakAdapter.GetAllId();
-        JSONArray madraksArray = new JSONArray();
-        for (int i = 0; i < MadrakIds.size(); i++) {
-            madraksArray.put(MadrakIds.get(i).intValue());
-        }
+                //در اینجا مدارک تحصیلی ست می شود
+                List<Integer> MadrakIds = madrakAdapter.GetAllId();
+                JSONArray madraksArray = new JSONArray();
+                for (int i = 0; i < MadrakIds.size(); i++) {
+                    madraksArray.put(MadrakIds.get(i).intValue());
+                }
 
-        //در اینجا رشته های تحصیلی ست می شود
-        List<Integer> MajorIds = majorAdapter.GetAllId();
-        JSONArray majorsArray = new JSONArray();
-        for (int i = 0; i < MajorIds.size(); i++) {
-            majorsArray.put(MajorIds.get(i).intValue());
-        }
+                //در اینجا رشته های تحصیلی ست می شود
+                List<Integer> MajorIds = majorAdapter.GetAllId();
+                JSONArray majorsArray = new JSONArray();
+                for (int i = 0; i < MajorIds.size(); i++) {
+                    majorsArray.put(MajorIds.get(i).intValue());
+                }
 
-        //در اینجا نوع شغل ست می شود
-        int JobType = ((VM_Job) cmb_JobType.getSelectedItem()).getId();
+                //در اینجا نوع شغل ست می شود
+                int JobType = ((VM_Job) cmb_JobType.getSelectedItem()).getId();
 
-        //در اینجا جنسیت ست می شود
-        int Gender = ((VM_Gender) cmb_Gender.getSelectedItem()).getId()-1;
+                //در اینجا جنسیت ست می شود
+                int Gender = ((VM_Gender) cmb_Gender.getSelectedItem()).getId() - 1;
 
-        //در اینجا سابقه بیمه ست می شود
-        boolean HasInsurance = false;
-        if (rdo_YesInsurance.isChecked()) {
-            HasInsurance = true;
-        } else if (rdo_NoInsurance.isChecked()) {
-            HasInsurance = false;
-        }
+                //در اینجا سابقه بیمه ست می شود
+                boolean HasInsurance = false;
+                if (rdo_YesInsurance.isChecked()) {
+                    HasInsurance = true;
+                } else if (rdo_NoInsurance.isChecked()) {
+                    HasInsurance = false;
+                }
 
-        //در اینجا سابقه کار ست می شود
-        boolean JobHistory = false;
-        if (rdo_HaveWorkExperience.isChecked()) {
-            JobHistory = true;
-        } else if (rdo_HaveNotWorkExperience.isChecked()) {
-            JobHistory = false;
-        }
+                //در اینجا سابقه کار ست می شود
+                boolean JobHistory = false;
+                if (rdo_HaveWorkExperience.isChecked()) {
+                    JobHistory = true;
+                } else if (rdo_HaveNotWorkExperience.isChecked()) {
+                    JobHistory = false;
+                }
 
-        //در اینجا زمان کاری ست می شود
-        int JobTime = 0;
-        if (rdo_FullTime.isChecked()) {
-            JobTime = 0;
-        } else if (rdo_PartTime.isChecked()) {
-            JobTime = 1;
-        } else if (rdo_TornTime.isChecked()) {
-            JobTime = 2;
-        }
+                //در اینجا زمان کاری ست می شود
+                int JobTime = 0;
+                if (rdo_FullTime.isChecked()) {
+                    JobTime = 0;
+                } else if (rdo_PartTime.isChecked()) {
+                    JobTime = 1;
+                } else if (rdo_TornTime.isChecked()) {
+                    JobTime = 2;
+                }
 
-        JSONObject object = new JSONObject();
-        try {
-            object.put("UniCode", UniCode);
-            object.put("Title", Title);
-            object.put("WorkingTime", WorkingTime);
-            object.put("NationalCode", NationalCode);
-            object.put("Age", Age);
-            object.put("MinPrice", MinPrice);
-            object.put("MaxPrice", MaxPrice);
-            object.put("Description", Description);
-            object.put("Madraks", madraksArray);
-            object.put("Majors", majorsArray);
-            object.put("JobType", JobType);
-            object.put("Gender", Gender);
-            object.put("HasInsurance", HasInsurance);
-            object.put("JobTime", JobTime);
-            object.put("JobHistory", JobHistory);
-            object.put("HoursOfWork", HoursOfWork);
+                JSONObject object = new JSONObject();
+                try {
+                    object.put("UniCode", UniCode);
+                    object.put("Title", Title);
+                    object.put("WorkingTime", WorkingTime);
+                    object.put("NationalCode", NationalCode);
+                    object.put("Age", Age);
+                    object.put("MinPrice", MinPrice);
+                    object.put("MaxPrice", MaxPrice);
+                    object.put("Description", Description);
+                    object.put("Madraks", madraksArray);
+                    object.put("Majors", majorsArray);
+                    object.put("JobType", JobType);
+                    object.put("Gender", Gender);
+                    object.put("HasInsurance", HasInsurance);
+                    object.put("JobTime", JobTime);
+                    object.put("JobHistory", JobHistory);
+                    object.put("HoursOfWork", HoursOfWork);
 
-            if (!image_item.getTag().toString().equalsIgnoreCase("default")) {
-                object.put("Picture", Base64Image.BitmapToBase64(((BitmapDrawable) image_item.getDrawable()).getBitmap()));
-            } else {
-                object.put("Picture", "");
+                    if (!image_item.getTag().toString().equalsIgnoreCase("default")) {
+                        object.put("Picture", Base64Image.BitmapToBase64(((BitmapDrawable) image_item.getDrawable()).getBitmap()));
+                    } else {
+                        object.put("Picture", "");
+                    }
+
+                    String Url = Api + "Item/PostItem";
+
+                    PostRquest = new JsonObjectRequest(Request.Method.POST, Url, object, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            progress.dismiss();
+                            try {
+
+                                if (response.getBoolean("Resalt")) {
+
+                                    new AlertDialog.Builder(getActivity())
+                                            .setTitle((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.Message) + "</font>")))
+                                            .setMessage((Html.fromHtml("<font color='#FF7F27'>" + response.getString("Message") + "</font>")))
+                                            .setPositiveButton((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.Ok) + "</font>")),
+                                                    new DialogInterface.OnClickListener() {
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            getActivity().onBackPressed();
+                                                        }
+                                                    })
+                                            .setIcon(android.R.drawable.ic_dialog_alert)
+                                            .setCancelable(true)
+                                            .show();
+
+                                } else {
+
+                                    new AlertDialog.Builder(getActivity())
+                                            .setTitle((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.Message) + "</font>")))
+                                            .setMessage((Html.fromHtml("<font color='#FF7F27'>" + response.getString("Message") + "</font>")))
+                                            .setPositiveButton((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.Ok) + "</font>")),
+                                                    new DialogInterface.OnClickListener() {
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                        }
+                                                    })
+                                            .setIcon(android.R.drawable.ic_dialog_alert)
+                                            .setCancelable(true)
+                                            .show();
+
+                                }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            progress.dismiss();
+                            boolean HasInternet = ((MainActivity) getActivity()).internet.HaveNetworkConnection();
+
+                            if (!HasInternet) {
+                                Toast.makeText(getActivity(), getResources().getString(R.string.CheckYourInternet), Toast.LENGTH_LONG).show();
+                            } else {
+                                new AlertDialog.Builder(getActivity())
+                                        .setTitle((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.Error) + "</font>")))
+                                        .setMessage((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.YourInternetIsVerySlow) + "</font>")))
+                                        .setPositiveButton((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.Ok) + "</font>")),
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        AddItem();
+                                                    }
+                                                })
+                                        .setIcon(android.R.drawable.ic_dialog_alert)
+                                        .setCancelable(true)
+                                        .show();
+                            }
+                        }
+                    });
+
+                    AppController.getInstance().addToRequestQueue(SetTimeOuteToPost(PostRquest));
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
-            String Url = Api + "Item/PostItem";
+            @Override
+            public void cancel() {
 
-            PostRquest = new JsonObjectRequest(Request.Method.POST, Url, object, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    progress.dismiss();
-                    try {
+            }
+        });
 
-                        if (response.getBoolean("Resalt")){
-
-                            new AlertDialog.Builder(getActivity())
-                                    .setTitle((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.Message) + "</font>")))
-                                    .setMessage((Html.fromHtml("<font color='#FF7F27'>" + response.getString("Message") + "</font>")))
-                                    .setPositiveButton((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.Ok) + "</font>")),
-                                            new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                    getActivity().onBackPressed();
-                                                }
-                                            })
-                                    .setIcon(android.R.drawable.ic_dialog_alert)
-                                    .setCancelable(true)
-                                    .show();
-
-                        }else{
-
-                            new AlertDialog.Builder(getActivity())
-                                    .setTitle((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.Message) + "</font>")))
-                                    .setMessage((Html.fromHtml("<font color='#FF7F27'>" + response.getString("Message") + "</font>")))
-                                    .setPositiveButton((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.Ok) + "</font>")),
-                                            new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                }
-                                            })
-                                    .setIcon(android.R.drawable.ic_dialog_alert)
-                                    .setCancelable(true)
-                                    .show();
-
-                        }
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    progress.dismiss();
-                    boolean HasInternet=((MainActivity)getActivity()).internet.HaveNetworkConnection();
-
-                    if (!HasInternet){
-                        Toast.makeText(getActivity(), getResources().getString(R.string.CheckYourInternet), Toast.LENGTH_LONG).show();
-                    }else{
-                        new AlertDialog.Builder(getActivity())
-                                .setTitle((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.Error) + "</font>")))
-                                .setMessage((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.YourInternetIsVerySlow) + "</font>")))
-                                .setPositiveButton((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.Ok) + "</font>")),
-                                        new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                AddItem();
-                                            }
-                                        })
-                                .setIcon(android.R.drawable.ic_dialog_alert)
-                                .setCancelable(true)
-                                .show();
-                    }
-                }
-            });
-
-            AppController.getInstance().addToRequestQueue(SetTimeOuteToPost(PostRquest));
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        dialog_confirm.show(getActivity().getSupportFragmentManager(),Dialog_Confirm.TAG);
     }
 
     //در اینجا المنت ها را خالی می کند
-    void ClearItems(){
+    void ClearItems() {
         txt_Title.setText("");
         txt_WorkingTime.setText("");
         txt_HoursOfWork.setText("");
@@ -772,13 +791,9 @@ public class Fragment_Add_Item extends BaseFragment implements View.OnClickListe
         cmb_JobType.setSelection(0);
         cmb_Gender.setSelection(0);
 
-        rdo_TornTime.setChecked(false);
-        rdo_PartTime.setChecked(false);
-        rdo_FullTime.setChecked(false);
-        rdo_NoInsurance.setChecked(false);
-        rdo_YesInsurance.setChecked(false);
-        rdo_HaveNotWorkExperience.setChecked(false);
-        rdo_HaveWorkExperience.setChecked(false);
+        PartTimeGroup.clearCheck();
+        HaveWorkExperienceGroup.clearCheck();
+        InsuranceGroups.clearCheck();
 
         txt_Description.setText("");
         image_item.setImageDrawable(getResources().getDrawable(R.drawable.add_image));

@@ -77,7 +77,7 @@ public class Fragment_Edit_Profile extends BaseFragment implements View.OnClickL
     LinearLayout Back;
     PersianDatePickerDialog picker;
     PersianCalendar initDate;
-    RadioGroup radioGroup;
+    RadioGroup CertificatesGroup,TheTypeOfWorkToConsiderGroup;
 
     @Nullable
     @Override
@@ -253,11 +253,6 @@ public class Fragment_Edit_Profile extends BaseFragment implements View.OnClickL
 
     void OnClick() {
 
-        rdo_Base3.setOnClickListener(view -> {
-            radioGroup.clearCheck();
-            rdo_Base3.setChecked(true);
-        });
-
         //در اینجا زمانی کاربر روی ادیت تکست تاریخ تولد فوکوس می کند ادیت تکست چپ نشین می شود
         txt_BirthDate.setOnFocusChangeListener((view, b) -> {
             if (b) {
@@ -377,7 +372,8 @@ public class Fragment_Edit_Profile extends BaseFragment implements View.OnClickL
         tbl_madrak = new Tbl_Madrak(((MainActivity) getActivity()).dbAdapter);
         tbl_user = new Tbl_User(((MainActivity) getActivity()).dbAdapter);
         txt_BirthDate = view.findViewById(R.id.txt_BirthDate);
-        radioGroup = view.findViewById(R.id.radioGroup);
+        CertificatesGroup = view.findViewById(R.id.CertificatesGroup);
+        TheTypeOfWorkToConsiderGroup = view.findViewById(R.id.TheTypeOfWorkToConsiderGroup);
         PersianCalendar initDate = new PersianCalendar();
         initDate.setPersianDate(1378, 3, 10);
     }
@@ -599,13 +595,8 @@ public class Fragment_Edit_Profile extends BaseFragment implements View.OnClickL
         txt_BirthDate.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
 
         //در اینجا رادیو باتن ها خالی می شوند
-        rdo_Both.setChecked(false);
-        rdo_PartTime.setChecked(false);
-        rdo_FullTime.setChecked(false);
-        rdo_Special.setChecked(false);
-        rdo_Base3.setChecked(false);
-        rdo_Base2.setChecked(false);
-        rdo_Base1.setChecked(false);
+        CertificatesGroup.clearCheck();
+        TheTypeOfWorkToConsiderGroup.clearCheck();
 
         //در اینجا چک باکس ها خالی می شوند
         chk_Motorcycle.setChecked(false);

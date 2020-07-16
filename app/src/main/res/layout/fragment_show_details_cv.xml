@@ -198,7 +198,8 @@
                                 android:fontFamily="@font/iran_sans"
                                 android:textSize="14dp"
                                 android:gravity="center"
-                                android:textColor="@color/colorBlack"/>
+                                android:textColor="@color/colorBlack"
+                                android:singleLine="true"/>
 
                         </LinearLayout>
 
@@ -238,7 +239,8 @@
                                 android:fontFamily="@font/iran_sans"
                                 android:textSize="14dp"
                                 android:gravity="center"
-                                android:textColor="@color/colorBlack"/>
+                                android:textColor="@color/colorBlack"
+                                android:singleLine="true"/>
 
                         </LinearLayout>
 
@@ -278,7 +280,8 @@
                                 android:fontFamily="@font/iran_sans"
                                 android:textSize="14dp"
                                 android:gravity="center"
-                                android:textColor="@color/colorBlack"/>
+                                android:textColor="@color/colorBlack"
+                                android:singleLine="true"/>
 
                         </LinearLayout>
 
@@ -318,7 +321,8 @@
                                 android:fontFamily="@font/iran_sans"
                                 android:textSize="14dp"
                                 android:gravity="center"
-                                android:textColor="@color/colorBlack"/>
+                                android:textColor="@color/colorBlack"
+                                android:singleLine="true"/>
 
                         </LinearLayout>
 
@@ -358,7 +362,8 @@
                                 android:fontFamily="@font/iran_sans"
                                 android:textSize="14dp"
                                 android:gravity="center"
-                                android:textColor="@color/colorBlack"/>
+                                android:textColor="@color/colorBlack"
+                                android:singleLine="true"/>
 
                         </LinearLayout>
 

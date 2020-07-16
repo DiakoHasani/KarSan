@@ -93,7 +93,7 @@ public class Fragment_Wallet extends BaseFragment implements View.OnClickListene
         PaymentRequest paymentRequest = ZarinPal.getPaymentRequest();
         ZarinPal zarinPal = ZarinPal.getPurchase(getContext());
 
-        paymentRequest.setMerchantID("9148cf38-a0c9-11e9-80c0-000c29344814");
+        paymentRequest.setMerchantID("b8dcfc0c-8d51-11ea-a2bf-000c295eb8fc");
         paymentRequest.setAmount(Price.P5000);
 
         paymentRequest.setDescription(getResources().getString(R.string.ChargeWalletKarsan));

@@ -299,7 +299,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="40dp"
-        android:src="@drawable/ic_top" />
+        android:src="@drawable/ic_top"
+        android:clickable="true"/>
 
 
 </RelativeLayout>

@@ -45,8 +45,10 @@ import ir.tdaapp.karsan.DataBase.Tbl_Major;
 import ir.tdaapp.karsan.DataBase.Tbl_User;
 import ir.tdaapp.karsan.MainActivity;
 import ir.tdaapp.karsan.R;
+import ir.tdaapp.karsan.Services.onClickDialog_Confirm;
 import ir.tdaapp.karsan.Utility.AppController;
 import ir.tdaapp.karsan.Utility.BaseFragment;
+import ir.tdaapp.karsan.Views.Dialog.Dialog_Confirm;
 
 public class Fragment_Show_Details_My_Item extends BaseFragment implements View.OnClickListener {
 
@@ -475,57 +477,70 @@ public class Fragment_Show_Details_My_Item extends BaseFragment implements View.
     void SetTypeItem(int Type) {
         try {
 
-            Loading.startShimmerAnimation();
-            SetEnabledAllButton(false);
+            Dialog_Confirm dialog_confirm=new Dialog_Confirm(getString(R.string.The_amount_of_2000_Tomans_will_be_deducted_from_your_wallet), new onClickDialog_Confirm() {
+                @Override
+                public void ok() {
 
-            String UniCode = ((MainActivity) getActivity()).tbl_user.GetUniCode();
+                    Loading.startShimmerAnimation();
+                    SetEnabledAllButton(false);
 
-            String Url = Api + "Item?ItemId=" + ItemId + "&UniCode=" + UniCode + "&Type=" + Type;
+                    String UniCode = ((MainActivity) getActivity()).tbl_user.GetUniCode();
 
-            PutTypeItem=new JsonObjectRequest(Request.Method.PUT,Url,null,response -> {
+                    String Url = Api + "Item?ItemId=" + ItemId + "&UniCode=" + UniCode + "&Type=" + Type;
 
-                try {
-                    Loading.stopShimmerAnimation();
-                    SetEnabledAllButton(true);
+                    PutTypeItem=new JsonObjectRequest(Request.Method.PUT,Url,null,response -> {
 
-                    if (response.getBoolean("Resalt")){
-                        SetEnabled_btn_TypeItem(false);
-                        Toast.makeText(getContext(), response.getString("Message"), Toast.LENGTH_SHORT).show();
-                    }else{
-                        SetEnabled_btn_TypeItem(true);
-                        Toast.makeText(getContext(), response.getString("Message"), Toast.LENGTH_SHORT).show();
-                    }
+                        try {
+                            Loading.stopShimmerAnimation();
+                            SetEnabledAllButton(true);
 
-                } catch (JSONException e) {
-                    Loading.stopShimmerAnimation();
-                    e.printStackTrace();
+                            if (response.getBoolean("Resalt")){
+                                SetEnabled_btn_TypeItem(false);
+                                Toast.makeText(getContext(), response.getString("Message"), Toast.LENGTH_SHORT).show();
+                            }else{
+                                SetEnabled_btn_TypeItem(true);
+                                Toast.makeText(getContext(), response.getString("Message"), Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            Loading.stopShimmerAnimation();
+                            e.printStackTrace();
+                        }
+
+                    },error -> {
+
+                        SetEnabledAllButton(true);
+                        Loading.stopShimmerAnimation();
+
+                        boolean hasInternet = ((MainActivity) getActivity()).internet.HaveNetworkConnection();
+
+                        if (hasInternet == false) {
+                            Toast.makeText(getActivity(), getResources().getString(R.string.CheckYourInternet), Toast.LENGTH_SHORT).show();
+                        } else {
+                            new AlertDialog.Builder(getActivity())
+                                    .setTitle((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.Error) + "</font>")))
+                                    .setMessage((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.YourInternetIsVerySlow) + "</font>")))
+                                    .setPositiveButton((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.Reload) + "</font>")), new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            SetTypeItem(Type);
+                                        }
+                                    })
+                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .setCancelable(true)
+                                    .show();
+                        }
+                    });
+
+                    AppController.getInstance().addToRequestQueue(SetTimeOuteToPost(PutTypeItem));
+
                 }
 
-            },error -> {
+                @Override
+                public void cancel() {
 
-                SetEnabledAllButton(true);
-                Loading.stopShimmerAnimation();
-
-                boolean hasInternet = ((MainActivity) getActivity()).internet.HaveNetworkConnection();
-
-                if (hasInternet == false) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.CheckYourInternet), Toast.LENGTH_SHORT).show();
-                } else {
-                    new AlertDialog.Builder(getActivity())
-                            .setTitle((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.Error) + "</font>")))
-                            .setMessage((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.YourInternetIsVerySlow) + "</font>")))
-                            .setPositiveButton((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.Reload) + "</font>")), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    SetTypeItem(Type);
-                                }
-                            })
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .setCancelable(true)
-                            .show();
                 }
             });
-
-            AppController.getInstance().addToRequestQueue(SetTimeOuteToPost(PutTypeItem));
+            dialog_confirm.show(getActivity().getSupportFragmentManager(),Dialog_Confirm.TAG);
 
         } catch (Exception e) {
         }

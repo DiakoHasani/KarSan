@@ -146,7 +146,7 @@ public class PaymentActivity extends AppCompatActivity {
         NoInternet.setVisibility(View.GONE);
 
         String UniqueCode = tbl_user.GetUniCode();
-        String Url = "http://karsan.tdaapp.ir/api/User/PutInventoryUser?UniCode=" + UniqueCode;
+        String Url = "http://karsanjob.ir/api/User/PutInventoryUser?UniCode=" + UniqueCode;
 
         PutInventoryRequest = new JsonObjectRequest(Request.Method.PUT, Url, null, response -> {
 

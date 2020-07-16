@@ -78,7 +78,7 @@ public class Fragment_CV extends BaseFragment implements View.OnClickListener {
     TextView lbl_TryingAgain;
     RelativeLayout NoInternet;
     SwipeRefreshLayout SwipeRefresh;
-    FloatingActionButton floatButton;
+    FloatingActionButton floatButton, btn_RemoveFilter;
     AlphaAnimation Anim_FadeIn;
     ImageView img_Filter;
     TextView lbl_Error;
@@ -118,6 +118,7 @@ public class Fragment_CV extends BaseFragment implements View.OnClickListener {
         tbl_major = new Tbl_Major(((MainActivity) getActivity()).dbAdapter);
         floatButton = view.findViewById(R.id.floatButton);
         NoData = view.findViewById(R.id.NoData);
+        btn_RemoveFilter = view.findViewById(R.id.btn_RemoveFilter);
         Anim_FadeIn = new AlphaAnimation(0.0f, 1.0f);
         Anim_FadeIn.setDuration(500);
         isWorking = false;
@@ -173,6 +174,13 @@ public class Fragment_CV extends BaseFragment implements View.OnClickListener {
         String Url = Api + "CV/PostCVS";
 
         request = new CustomRequest(Request.Method.POST, Url, input, response -> {
+
+            if (filterCV.isEnableSearch()) {
+                btn_RemoveFilter.show();
+            } else {
+                btn_RemoveFilter.hide();
+            }
+
             isWorking = false;
             SwipeRefresh.setRefreshing(false);
 
@@ -220,6 +228,13 @@ public class Fragment_CV extends BaseFragment implements View.OnClickListener {
             }
 
         }, error -> {
+
+            if (filterCV.isEnableSearch()) {
+                btn_RemoveFilter.show();
+            } else {
+                btn_RemoveFilter.hide();
+            }
+
             showError(error);
         });
 
@@ -298,6 +313,12 @@ public class Fragment_CV extends BaseFragment implements View.OnClickListener {
             case R.id.img_Filter:
                 openFilterDialog();
                 break;
+            case R.id.btn_RemoveFilter:
+                btn_RemoveFilter.hide();
+                filterCV = new VM_FilterCV();
+                Page = 0;
+                SetCVs();
+                break;
         }
     }
 
@@ -313,6 +334,7 @@ public class Fragment_CV extends BaseFragment implements View.OnClickListener {
             dialog_filter_cv.show(ft, Dialog_Filter_CV.TAG);
 
             dialog_filter_cv.setClickDialogFilterSearh(() -> {
+                Page = 0;
                 SetCVs();
             });
         }
@@ -323,6 +345,7 @@ public class Fragment_CV extends BaseFragment implements View.OnClickListener {
         lbl_TryingAgain.setOnClickListener(this);
         floatButton.setOnClickListener(this);
         img_Filter.setOnClickListener(this);
+        btn_RemoveFilter.setOnClickListener(this);
     }
 
     //در اینجا هنگامی بخواهد صفحه از اول لود شود کد زیر فراخوانی می شود

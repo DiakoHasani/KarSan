@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -89,7 +90,7 @@ import static androidx.core.content.FileProvider.getUriForFile;
 
 public class Fragment_Edit_Item extends BaseFragment implements View.OnClickListener {
 
-    public final static String TAG="Fragment_Edit_Item";
+    public final static String TAG = "Fragment_Edit_Item";
 
     Spinner cmb_Madrak, cmb_Major, cmb_JobType, cmb_Gender;
     Tbl_Madrak tbl_madrak;
@@ -111,6 +112,7 @@ public class Fragment_Edit_Item extends BaseFragment implements View.OnClickList
     LinearLayout Back;
     int ItemId;
     RequestQueue requestQueue;
+    RadioGroup InsuranceGroup, WorkExperienceGroup, timeGroup;
 
     @Nullable
     @Override
@@ -143,7 +145,7 @@ public class Fragment_Edit_Item extends BaseFragment implements View.OnClickList
 
         requestQueue.add(GetDetailsRequest);
 
-        if (EditRquest!=null){
+        if (EditRquest != null) {
             EditRquest.setTag(TAG);
             requestQueue.add(EditRquest);
         }
@@ -185,6 +187,9 @@ public class Fragment_Edit_Item extends BaseFragment implements View.OnClickList
         RecyclerMajors = view.findViewById(R.id.RecyclerMajors);
         RecyclerMadraks = view.findViewById(R.id.RecyclerMadraks);
         Back = view.findViewById(R.id.Back);
+        InsuranceGroup = view.findViewById(R.id.InsuranceGroup);
+        WorkExperienceGroup = view.findViewById(R.id.WorkExperienceGroup);
+        timeGroup = view.findViewById(R.id.timeGroup);
 
         tbl_madrak = new Tbl_Madrak(((MainActivity) getActivity()).dbAdapter);
         tbl_major = new Tbl_Major(((MainActivity) getActivity()).dbAdapter);
@@ -579,8 +584,8 @@ public class Fragment_Edit_Item extends BaseFragment implements View.OnClickList
         String NationalCode = Replace.Number_fn_To_en(txt_NationalCode.getText().toString());
         String Age = txt_Age.getText().toString();
         String HoursOfWork = txt_HoursOfWork.getText().toString();
-        String MaxPrice = Replace.Number_fn_To_en(txt_MaxPrice.getText().toString().replace(",","").replace("٬",""));
-        String MinPrice = Replace.Number_fn_To_en(txt_MinPrice.getText().toString().replace(",","").replace("٬",""));
+        String MaxPrice = Replace.Number_fn_To_en(txt_MaxPrice.getText().toString().replace(",", "").replace("٬", ""));
+        String MinPrice = Replace.Number_fn_To_en(txt_MinPrice.getText().toString().replace(",", "").replace("٬", ""));
         String Description = txt_Description.getText().toString();
         String UniCode = tbl_user.GetUniCode();
 
@@ -648,7 +653,7 @@ public class Fragment_Edit_Item extends BaseFragment implements View.OnClickList
             object.put("JobTime", JobTime);
             object.put("JobHistory", JobHistory);
             object.put("HoursOfWork", HoursOfWork);
-            object.put("ItemId",ItemId);
+            object.put("ItemId", ItemId);
 
             if (!image_item.getTag().toString().equalsIgnoreCase("default")) {
                 object.put("Picture", Base64Image.BitmapToBase64(((BitmapDrawable) image_item.getDrawable()).getBitmap()));
@@ -712,6 +717,7 @@ public class Fragment_Edit_Item extends BaseFragment implements View.OnClickList
     void ClearItems() {
         txt_Title.setText("");
         txt_WorkingTime.setText("");
+        txt_HoursOfWork.setText("");
 
         txt_NationalCode.setText("");
         txt_NationalCode.setHint(getResources().getString(R.string.NationalCode2));
@@ -733,13 +739,9 @@ public class Fragment_Edit_Item extends BaseFragment implements View.OnClickList
         cmb_JobType.setSelection(0);
         cmb_Gender.setSelection(0);
 
-        rdo_TornTime.setChecked(false);
-        rdo_PartTime.setChecked(false);
-        rdo_FullTime.setChecked(false);
-        rdo_NoInsurance.setChecked(false);
-        rdo_YesInsurance.setChecked(false);
-        rdo_HaveNotWorkExperience.setChecked(false);
-        rdo_HaveWorkExperience.setChecked(false);
+        InsuranceGroup.clearCheck();
+        WorkExperienceGroup.clearCheck();
+        timeGroup.clearCheck();
 
         txt_Description.setText("");
         image_item.setImageDrawable(getResources().getDrawable(R.drawable.add_image));
@@ -848,7 +850,7 @@ public class Fragment_Edit_Item extends BaseFragment implements View.OnClickList
                                 .into(image_item);
 
                         image_item.setTag("Selected");
-                    }else{
+                    } else {
                         image_item.setTag("default");
                     }
                 } catch (Exception e) {

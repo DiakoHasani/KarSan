@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -57,6 +58,7 @@ public class Dialog_Filter_Search extends BaseDialogFragment {
     RadioButton rdo_IHaveJobHistory, rdo_IHaveNotJobHistory;
     Button btn_ClearOptions, btn_Search;
     onClickDialogFilterSearh clickDialogFilterSearh;
+    RadioGroup IHaveJobHistoryGroup, IHaveInsuranceHistoryGroup;
 
     @Nullable
     @Override
@@ -89,6 +91,8 @@ public class Dialog_Filter_Search extends BaseDialogFragment {
         rdo_IHaveNotJobHistory = view.findViewById(R.id.rdo_IHaveNotJobHistory);
         btn_ClearOptions = view.findViewById(R.id.btn_ClearOptions);
         btn_Search = view.findViewById(R.id.btn_Search);
+        IHaveJobHistoryGroup = view.findViewById(R.id.IHaveJobHistoryGroup);
+        IHaveInsuranceHistoryGroup = view.findViewById(R.id.IHaveInsuranceHistoryGroup);
     }
 
     public void setClickDialogFilterSearh(onClickDialogFilterSearh clickDialogFilterSearh) {
@@ -186,10 +190,8 @@ public class Dialog_Filter_Search extends BaseDialogFragment {
         chk_FullTime.setChecked(false);
         chk_PartTime.setChecked(false);
         chk_TornTime.setChecked(false);
-        rdo_IHaveInsuranceHistory.setChecked(false);
-        rdo_IHaveNotInsuranceHistory.setChecked(false);
-        rdo_IHaveJobHistory.setChecked(false);
-        rdo_IHaveNotJobHistory.setChecked(false);
+        IHaveJobHistoryGroup.clearCheck();
+        IHaveInsuranceHistoryGroup.clearCheck();
         cmb_Madrak.setSelection(0);
         cmb_Major.setSelection(0);
         ((MainActivity) getActivity()).SearchFilter = new VM_SearchFilter();
@@ -239,10 +241,10 @@ public class Dialog_Filter_Search extends BaseDialogFragment {
         }
 
         //در اینجا مدرک ست می شود
-        ((MainActivity) getActivity()).SearchFilter.setMadrak(((VM_Madrak)cmb_Madrak.getSelectedItem()).getId());
+        ((MainActivity) getActivity()).SearchFilter.setMadrak(((VM_Madrak) cmb_Madrak.getSelectedItem()).getId());
 
         //در اینجا رشته تحصیلی ست می شود
-        ((MainActivity) getActivity()).SearchFilter.setMajor(((VM_Major)cmb_Major.getSelectedItem()).getId());
+        ((MainActivity) getActivity()).SearchFilter.setMajor(((VM_Major) cmb_Major.getSelectedItem()).getId());
     }
 
     ///در اینجا مقادیر فیلتر هارا در اکتیویتی گرفته و در المنت ها قرار می دهد
@@ -303,7 +305,7 @@ public class Dialog_Filter_Search extends BaseDialogFragment {
         if (searchFilter.getMadrak() != 0) {
             int pos = tbl_madrak.GetPosition(searchFilter.getMadrak());
             if (pos != -1) {
-                cmb_Madrak.setSelection(pos+1);
+                cmb_Madrak.setSelection(pos + 1);
             }
         }
 
@@ -311,7 +313,7 @@ public class Dialog_Filter_Search extends BaseDialogFragment {
         if (searchFilter.getMajor() != 0) {
             int pos = tbl_major.GetPosition(searchFilter.getMajor());
             if (pos != -1) {
-                cmb_Major.setSelection(pos+1);
+                cmb_Major.setSelection(pos + 1);
             }
         }
     }

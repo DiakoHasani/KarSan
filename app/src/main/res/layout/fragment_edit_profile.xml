@@ -239,7 +239,7 @@
                             android:orientation="vertical">
 
                             <RadioGroup
-                                android:id="@+id/radioGroup"
+                                android:id="@+id/CertificatesGroup"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
@@ -326,6 +326,7 @@
                         android:layout_marginBottom="80dp">
 
                         <RadioGroup
+                            android:id="@+id/TheTypeOfWorkToConsiderGroup"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"

@@ -21,4 +21,6 @@
     <color name="colorWhatsApp">#23A416</color>
     <color name="colorLowRed">#B13333</color>
     <color name="colorBackgroundDialog">#52232F34</color>
+    <color name="colorTitleDialog">#232F34</color>
+    <color name="colorError">#b00020</color>
 </resources>

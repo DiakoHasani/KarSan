@@ -188,6 +188,7 @@ public class Fragment_Show_Details_News extends BaseFragment {
             Text += getResources().getString(R.string.AbsuluteNews) + lbl_News_Summary.getText() + "\n\n";
             Text += getResources().getString(R.string.Date) + lbl_DateInsert.getText() + "\n\n";
             Text += getResources().getString(R.string.ReadMoreNewsKarsan);
+            Text+="\n\n https://play.google.com/store/apps/details?id=ir.tdaapp.karsan&hl=en";
 
             Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
             sharingIntent.setType("text/plain");

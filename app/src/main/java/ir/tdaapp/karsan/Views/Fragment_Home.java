@@ -107,7 +107,6 @@ public class Fragment_Home extends BaseFragment {
     private boolean started;
     private Handler handler;
 
-    AlphaAnimation Anim_FadeIn;
 
     private ShimmerFrameLayout mShimmerViewContainer;
 
@@ -118,9 +117,10 @@ public class Fragment_Home extends BaseFragment {
 
     ImageView img_Filter_Search;
 
-    FloatingActionButton floatButton;
+    FloatingActionButton floatButton, btn_RemoveFilter;
     SwipeRefreshLayout SwipeRefresh;
     TextView lbl_Error;
+    Animation ani_FadeIn,ani_FadeOut;
 
     @Nullable
     @Override
@@ -174,10 +174,10 @@ public class Fragment_Home extends BaseFragment {
         floatButton = view.findViewById(R.id.floatButton);
         SwipeRefresh = view.findViewById(R.id.SwipeRefresh);
         lbl_Error = view.findViewById(R.id.lbl_Error);
+        btn_RemoveFilter = view.findViewById(R.id.btn_RemoveFilter);
 
-        Anim_FadeIn = new AlphaAnimation(0.0f, 1.0f);
-
-        Anim_FadeIn.setDuration(500);
+        ani_FadeIn = AnimationUtils.loadAnimation(getContext(), R.anim.fadein);
+        ani_FadeOut = AnimationUtils.loadAnimation(getContext(), R.anim.fadeout);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -300,6 +300,13 @@ public class Fragment_Home extends BaseFragment {
         floatButton.setOnClickListener(view -> {
             NestedScroll.smoothScrollTo(0, 0);
             floatButton.hide();
+        });
+
+        btn_RemoveFilter.setOnClickListener(view -> {
+            btn_RemoveFilter.hide();
+            ((MainActivity) getActivity()).SearchFilter = new VM_SearchFilter();
+            txt_Search.setText("");
+            SearchFilters();
         });
 
     }
@@ -442,8 +449,21 @@ public class Fragment_Home extends BaseFragment {
             public void onResponse(JSONArray response) {
 
                 try {
+
+                    if (((MainActivity) getActivity()).SearchFilter.IsEnabledSearched()) {
+                        btn_RemoveFilter.show();
+                    } else {
+                        btn_RemoveFilter.hide();
+                    }
+
+                    if (!txt_Search.getText().toString().equalsIgnoreCase("")) {
+                        if (!btn_RemoveFilter.isShown())
+                            btn_RemoveFilter.show();
+                    }
+
                     isWorking = false;
                     SwipeRefresh.setRefreshing(false);
+                    progressbar_items.setAnimation(ani_FadeOut);
                     progressbar_items.setVisibility(View.GONE);
 
                     NoData.setVisibility(View.GONE);
@@ -519,6 +539,7 @@ public class Fragment_Home extends BaseFragment {
                             mShimmerViewContainer.stopShimmerAnimation();
                             mShimmerViewContainer.setVisibility(View.GONE);
                         } else {
+                            progressbar_items.setAnimation(ani_FadeOut);
                             progressbar_items.setVisibility(View.GONE);
                             itemAdapter.AddItems(vals);
                             loading = true;
@@ -535,6 +556,18 @@ public class Fragment_Home extends BaseFragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+
+                if (((MainActivity) getActivity()).SearchFilter.IsEnabledSearched()) {
+                    btn_RemoveFilter.show();
+                } else {
+                    btn_RemoveFilter.hide();
+                }
+
+                if (!txt_Search.getText().toString().equalsIgnoreCase("")) {
+                    if (!btn_RemoveFilter.isShown())
+                        btn_RemoveFilter.show();
+                }
+
                 showError(error);
             }
         });
@@ -649,6 +682,7 @@ public class Fragment_Home extends BaseFragment {
                         if (!isWorking) {
                             loading = false;
 
+                            progressbar_items.setAnimation(ani_FadeIn);
                             progressbar_items.setVisibility(View.VISIBLE);
 
                             ++Page;
@@ -697,10 +731,11 @@ public class Fragment_Home extends BaseFragment {
     //در اینجا هنگامی بخواهد صفحه از اول لود شود کد زیر فراخوانی می شود
     void RefreshPage() {
         SwipeRefresh.setOnRefreshListener(() -> {
+            progressbar_items.setAnimation(ani_FadeOut);
             progressbar_items.setVisibility(View.GONE);
-            itemAdapter=new ItemAdapter(getActivity(),new ArrayList<>());
+            itemAdapter = new ItemAdapter(getActivity(), new ArrayList<>());
             RecyclerItem.setAdapter(itemAdapter);
-            RecyclerItem.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL,false));
+            RecyclerItem.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
             Page = 0;
             SetItems();
         });
@@ -729,6 +764,7 @@ public class Fragment_Home extends BaseFragment {
 
         mShimmerViewContainer.stopShimmerAnimation();
         mShimmerViewContainer.setVisibility(View.GONE);
+        progressbar_items.setAnimation(ani_FadeOut);
         progressbar_items.setVisibility(View.GONE);
 
         String errorText;

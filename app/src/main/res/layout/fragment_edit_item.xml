@@ -404,6 +404,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <RadioGroup
+                    android:id="@+id/InsuranceGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -444,6 +445,7 @@
                 </RadioGroup>
 
                 <RadioGroup
+                    android:id="@+id/WorkExperienceGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -499,6 +501,7 @@
                         android:gravity="right"/>
 
                     <RadioGroup
+                        android:id="@+id/timeGroup"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
