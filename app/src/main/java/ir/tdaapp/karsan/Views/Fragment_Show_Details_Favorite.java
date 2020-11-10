@@ -35,6 +35,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import ir.tdaapp.karsan.DataBase.Tbl_FavoritesItem;
@@ -132,12 +134,16 @@ public class Fragment_Show_Details_Favorite extends BaseFragment {
                         }
 
                         //در اینجا حقوق ست می شود
-                        if (!MinPrice.equalsIgnoreCase("0")) {
-                            //در اینجا اگر کاربر حداقل حقوق را وارد کرده باشد مقدار زیر ست می شود
-                            lbl_Price.setText(getResources().getString(R.string.from) + " " + MinPrice + getResources().getString(R.string.Toman) + " " + getResources().getString(R.string.until) + " " + MaxPrice + getResources().getString(R.string.Toman));
+                        if (!MinPrice.equalsIgnoreCase("-1") && !MaxPrice.equalsIgnoreCase("-1")) {
+                            if (!MinPrice.equalsIgnoreCase("0")) {
+                                //در اینجا اگر کاربر حداقل حقوق را وارد کرده باشد مقدار زیر ست می شود
+                                lbl_Price.setText(getResources().getString(R.string.from) + " " + showPrice(MinPrice) + getResources().getString(R.string.Toman) + " " + getResources().getString(R.string.until) + " " + showPrice(MaxPrice) + getResources().getString(R.string.Toman));
+                            } else {
+                                //در اینجا اگر کاربر حداقل حقوق را وارد نکرده باشد مقدار زیر ست می شود
+                                lbl_Price.setText(showPrice(MaxPrice) + " " + getResources().getString(R.string.Toman));
+                            }
                         } else {
-                            //در اینجا اگر کاربر حداقل حقوق را وارد نکرده باشد مقدار زیر ست می شود
-                            lbl_Price.setText(MaxPrice + " " + getResources().getString(R.string.Toman));
+                            lbl_Price.setText(getString(R.string.Agreement));
                         }
 
                         //در اینجا تاریخ درج آگهی ست می شود
@@ -415,5 +421,19 @@ public class Fragment_Show_Details_Favorite extends BaseFragment {
                 }
             }
         });
+    }
+
+    //در اینجا مبلغ سه رقم جدا خواهد شد
+    String showPrice(String price) {
+        price = price.replace(",", "");
+
+        if (price.length() > 0) {
+            DecimalFormat sdd = new DecimalFormat("#,###");
+            Double doubleNumber = Double.parseDouble(price);
+
+            String format = sdd.format(doubleNumber);
+            return format;
+        }
+        return price;
     }
 }

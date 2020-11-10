@@ -231,13 +231,29 @@
                     android:orientation="vertical"
                     android:layout_marginTop="20dp">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/iran_sans"
-                        android:textSize="16sp"
-                        android:text="@string/Price"
-                        android:textColor="@color/colorCentral"/>
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/iran_sans"
+                            android:textSize="16sp"
+                            android:text="@string/Price"
+                            android:textColor="@color/colorCentral"/>
+
+                        <CheckBox
+                            android:id="@+id/chk_Agreement"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:text="@string/Agreement"
+                            android:fontFamily="@font/iran_sans"
+                            android:textSize="12dp"/>
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"

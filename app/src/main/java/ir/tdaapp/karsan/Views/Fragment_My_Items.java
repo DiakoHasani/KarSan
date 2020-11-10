@@ -40,6 +40,7 @@ import ir.tdaapp.karsan.Adapter.MyItemsAdapter;
 import ir.tdaapp.karsan.MainActivity;
 import ir.tdaapp.karsan.R;
 import ir.tdaapp.karsan.Services.IRecyclerMyItemClick;
+import ir.tdaapp.karsan.Services.IRefreshPage;
 import ir.tdaapp.karsan.Utility.AppController;
 import ir.tdaapp.karsan.Utility.BaseFragment;
 import ir.tdaapp.karsan.Utility.Replace;
@@ -129,6 +130,7 @@ public class Fragment_My_Items extends BaseFragment implements View.OnClickListe
     void GetVals() {
 
         if (Page == 0) {
+            RecyclerItem.setVisibility(View.GONE);
             Loading.startShimmerAnimation();
             Loading.setVisibility(View.VISIBLE);
         }
@@ -145,6 +147,7 @@ public class Fragment_My_Items extends BaseFragment implements View.OnClickListe
 
                 Loading.stopShimmerAnimation();
                 Loading.setVisibility(View.GONE);
+                RecyclerItem.setVisibility(View.VISIBLE);
 
                 List<VM_Short_Item> vals = new ArrayList<>();
 
@@ -189,20 +192,21 @@ public class Fragment_My_Items extends BaseFragment implements View.OnClickListe
 
 
                 if (Page == 0) {
-                    myItemsAdapter = new MyItemsAdapter(getContext(), vals, new IRecyclerMyItemClick() {
-                        @Override
-                        public void onClick(View view, VM_Short_Item item) {
-                            Bundle bundle=new Bundle();
-                            bundle.putInt("Id",item.getId());
-                            Fragment_Show_Details_My_Item fragment_show_details_my_item=new Fragment_Show_Details_My_Item();
+                    myItemsAdapter = new MyItemsAdapter(getContext(), vals, (view, item) -> {
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("Id", item.getId());
+                        Fragment_Show_Details_My_Item fragment_show_details_my_item = new Fragment_Show_Details_My_Item();
 
-                            fragment_show_details_my_item.setArguments(bundle);
+                        fragment_show_details_my_item.setArguments(bundle);
+                        fragment_show_details_my_item.setiRefreshPage(() -> {
+                            Page = 0;
+                            GetVals();
+                        });
 
-                            getActivity().getSupportFragmentManager()
-                                    .beginTransaction().setCustomAnimations(R.anim.fadein,R.anim.fadeout)
-                                    .add(R.id.Frame_Main,fragment_show_details_my_item)
-                                    .addToBackStack(null).commit();
-                        }
+                        getActivity().getSupportFragmentManager()
+                                .beginTransaction().setCustomAnimations(R.anim.fadein, R.anim.fadeout)
+                                .add(R.id.Frame_Main, fragment_show_details_my_item)
+                                .addToBackStack(null).commit();
                     });
                     linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
                     RecyclerItem.setLayoutManager(linearLayoutManager);
@@ -219,6 +223,8 @@ public class Fragment_My_Items extends BaseFragment implements View.OnClickListe
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+
+                RecyclerItem.setVisibility(View.VISIBLE);
                 Loading.stopShimmerAnimation();
                 Loading.setVisibility(View.GONE);
 
@@ -261,7 +267,7 @@ public class Fragment_My_Items extends BaseFragment implements View.OnClickListe
         }
     }
 
-    void OnClick(){
+    void OnClick() {
         Back.setOnClickListener(this);
     }
 }

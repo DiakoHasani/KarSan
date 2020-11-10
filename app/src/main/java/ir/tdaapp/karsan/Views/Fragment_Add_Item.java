@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -113,6 +114,7 @@ public class Fragment_Add_Item extends BaseFragment implements View.OnClickListe
     LinearLayout Back;
     RequestQueue requestQueue;
     RadioGroup PartTimeGroup, HaveWorkExperienceGroup, InsuranceGroups;
+    CheckBox chk_Agreement;
 
     @Nullable
     @Override
@@ -198,6 +200,7 @@ public class Fragment_Add_Item extends BaseFragment implements View.OnClickListe
         InsuranceGroups = view.findViewById(R.id.InsuranceGroups);
         HaveWorkExperienceGroup = view.findViewById(R.id.HaveWorkExperienceGroup);
         PartTimeGroup = view.findViewById(R.id.PartTimeGroup);
+        chk_Agreement = view.findViewById(R.id.chk_Agreement);
     }
 
     void SetSpinner() {
@@ -260,6 +263,11 @@ public class Fragment_Add_Item extends BaseFragment implements View.OnClickListe
     }
 
     void OnClick() {
+
+        chk_Agreement.setOnCheckedChangeListener((compoundButton, b) -> {
+            txt_MinPrice.setEnabled(!b);
+            txt_MaxPrice.setEnabled(!b);
+        });
 
         txt_NationalCode.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -524,9 +532,11 @@ public class Fragment_Add_Item extends BaseFragment implements View.OnClickListe
             return false;
 
         //در اینجا حداکثر حقوق چک می شود
-        Valid = !Validation.Required(txt_MaxPrice, getResources().getString(R.string.ThisValueMustBeFilled));
-        if (!Valid)
-            return false;
+        if (!chk_Agreement.isChecked()){
+            Valid = !Validation.Required(txt_MaxPrice, getResources().getString(R.string.ThisValueMustBeFilled));
+            if (!Valid)
+                return false;
+        }
 
 
         //در اینجا چک می شود حداقل حقوق بزرگتر از حداکثر حقوق باشد
@@ -588,7 +598,7 @@ public class Fragment_Add_Item extends BaseFragment implements View.OnClickListe
     //در اینجا آیتم اضافه می شود
     void AddItem() {
 
-        Dialog_Confirm dialog_confirm=new Dialog_Confirm(getString(R.string.The_amount_of_5000_Tomans_will_be_deducted_from_your_wallet), new onClickDialog_Confirm() {
+        Dialog_Confirm dialog_confirm = new Dialog_Confirm(getString(R.string.The_amount_of_5000_Tomans_will_be_deducted_from_your_wallet), new onClickDialog_Confirm() {
             @Override
             public void ok() {
                 final ProgressDialog progress = new ProgressDialog(getActivity());
@@ -602,10 +612,14 @@ public class Fragment_Add_Item extends BaseFragment implements View.OnClickListe
                 String Age = txt_Age.getText().toString();
                 String HoursOfWork = txt_HoursOfWork.getText().toString();
 
-
-                String MaxPrice = Replace.Number_fn_To_en(Replace.txt_Price(txt_MaxPrice.getText().toString().replace(",", "").replace("٬", "")));
-                String MinPrice = Replace.Number_fn_To_en(Replace.txt_Price(txt_MinPrice.getText().toString().replace(",", "").replace("٬", "")));
-
+                //در اینجا حقوق ست می شود اگر کاربر تیک توافقی را بزند پیش فرض عدد 1- ست می شود
+                String MaxPrice, MinPrice;
+                if (!chk_Agreement.isChecked()) {
+                    MaxPrice = Replace.Number_fn_To_en(Replace.txt_Price(txt_MaxPrice.getText().toString().replace(",", "").replace("٬", "")));
+                    MinPrice = Replace.Number_fn_To_en(Replace.txt_Price(txt_MinPrice.getText().toString().replace(",", "").replace("٬", "")));
+                } else {
+                    MaxPrice = MinPrice = "-1";
+                }
 
                 String Description = txt_Description.getText().toString();
                 String UniCode = tbl_user.GetUniCode();
@@ -762,7 +776,7 @@ public class Fragment_Add_Item extends BaseFragment implements View.OnClickListe
             }
         });
 
-        dialog_confirm.show(getActivity().getSupportFragmentManager(),Dialog_Confirm.TAG);
+        dialog_confirm.show(getActivity().getSupportFragmentManager(), Dialog_Confirm.TAG);
     }
 
     //در اینجا المنت ها را خالی می کند

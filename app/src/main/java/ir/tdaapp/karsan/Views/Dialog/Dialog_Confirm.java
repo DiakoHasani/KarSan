@@ -76,11 +76,11 @@ public class Dialog_Confirm extends BaseDialogFragment implements View.OnClickLi
         switch (view.getId()) {
             case R.id.btn_ok:
                 clickDialog_confirm.ok();
-                getDialog().dismiss();
+                dismiss();
                 break;
             case R.id.btn_cancel:
                 clickDialog_confirm.cancel();
-                getDialog().dismiss();
+                dismiss();
                 break;
         }
     }

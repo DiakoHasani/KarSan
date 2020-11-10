@@ -131,6 +131,9 @@
     <string name="Share">اشتراک</string>
     <string name="MyRefrenceCode">کد معرف من</string>
     <string name="NotNo">فعلا نه</string>
+    <string name="yes">بله</string>
+    <string name="no">خیر</string>
+    <string name="Agreement">توافقی</string>
     <string name="Titr">سر تیتر: </string>
     <string name="AbsuluteNews">چکیده خبر: </string>
     <string name="Date">تاریخ: </string>

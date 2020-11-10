@@ -36,6 +36,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import ir.tdaapp.karsan.DataBase.Tbl_FavoritesItem;
@@ -45,6 +47,7 @@ import ir.tdaapp.karsan.DataBase.Tbl_Major;
 import ir.tdaapp.karsan.DataBase.Tbl_User;
 import ir.tdaapp.karsan.MainActivity;
 import ir.tdaapp.karsan.R;
+import ir.tdaapp.karsan.Services.IRefreshPage;
 import ir.tdaapp.karsan.Services.onClickDialog_Confirm;
 import ir.tdaapp.karsan.Utility.AppController;
 import ir.tdaapp.karsan.Utility.BaseFragment;
@@ -67,12 +70,13 @@ public class Fragment_Show_Details_My_Item extends BaseFragment implements View.
     Tbl_User tbl_user;
     ImageView img;
 
-    JsonObjectRequest request, DeleteRequst, UndoDeleteRequest,PutTypeItem;
+    JsonObjectRequest request, DeleteRequst, UndoDeleteRequest, PutTypeItem;
     RequestQueue requestQueue;
 
     LinearLayout Back;
     Button btn_Delete, btn_Undo, btn_instantaneous, btn_Special;
     int ItemId = 0;
+    IRefreshPage iRefreshPage;
 
     @Nullable
     @Override
@@ -122,6 +126,10 @@ public class Fragment_Show_Details_My_Item extends BaseFragment implements View.
         btn_Special = view.findViewById(R.id.btn_Special);
     }
 
+    public void setiRefreshPage(IRefreshPage iRefreshPage) {
+        this.iRefreshPage = iRefreshPage;
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -162,7 +170,7 @@ public class Fragment_Show_Details_My_Item extends BaseFragment implements View.
             String Url = Api + "Item/" + bundle.getInt("Id");
             if (tbl_user.HasAccount()) {
                 Url += "?UniCode=" + tbl_user.GetUniCode();
-            }else{
+            } else {
                 Url += "?UniCode=";
             }
             request = new JsonObjectRequest(Request.Method.GET, Url, null, new Response.Listener<JSONObject>() {
@@ -181,9 +189,9 @@ public class Fragment_Show_Details_My_Item extends BaseFragment implements View.
                                     .into(img);
                         }
 
-                        if (response.getInt("TypeItem")==0){
+                        if (response.getInt("TypeItem") == 0) {
                             SetEnabled_btn_TypeItem(true);
-                        }else{
+                        } else {
                             SetEnabled_btn_TypeItem(false);
                         }
 
@@ -199,12 +207,16 @@ public class Fragment_Show_Details_My_Item extends BaseFragment implements View.
                         }
 
                         //در اینجا حقوق ست می شود
-                        if (!MinPrice.equalsIgnoreCase("0")) {
-                            //در اینجا اگر کاربر حداقل حقوق را وارد کرده باشد مقدار زیر ست می شود
-                            lbl_Price.setText(getResources().getString(R.string.from) + " " + MinPrice + getResources().getString(R.string.Toman) + " " + getResources().getString(R.string.until) + " " + MaxPrice + getResources().getString(R.string.Toman));
+                        if (!MinPrice.equalsIgnoreCase("-1") && !MaxPrice.equalsIgnoreCase("-1")) {
+                            if (!MinPrice.equalsIgnoreCase("0")) {
+                                //در اینجا اگر کاربر حداقل حقوق را وارد کرده باشد مقدار زیر ست می شود
+                                lbl_Price.setText(getResources().getString(R.string.from) + " " + showPrice(MinPrice) + getResources().getString(R.string.Toman) + " " + getResources().getString(R.string.until) + " " + showPrice(MaxPrice) + getResources().getString(R.string.Toman));
+                            } else {
+                                //در اینجا اگر کاربر حداقل حقوق را وارد نکرده باشد مقدار زیر ست می شود
+                                lbl_Price.setText(showPrice(MaxPrice) + " " + getResources().getString(R.string.Toman));
+                            }
                         } else {
-                            //در اینجا اگر کاربر حداقل حقوق را وارد نکرده باشد مقدار زیر ست می شود
-                            lbl_Price.setText(MaxPrice + " " + getResources().getString(R.string.Toman));
+                            lbl_Price.setText(getString(R.string.Agreement));
                         }
 
                         //در اینجا تاریخ درج آگهی ست می شود
@@ -277,6 +289,11 @@ public class Fragment_Show_Details_My_Item extends BaseFragment implements View.
                             btn_Edit.setEnabled(false);
                             btn_Delete.setVisibility(View.GONE);
                             btn_Undo.setVisibility(View.VISIBLE);
+                            btn_Undo.setEnabled(true);
+
+                            if (response.getInt("Status") == 1) {
+                                btn_Undo.setEnabled(false);
+                            }
                         }
 
 
@@ -342,6 +359,7 @@ public class Fragment_Show_Details_My_Item extends BaseFragment implements View.
                 bundle.putInt("Id", ItemId);
                 Fragment_Edit_Item fragment_edit_item = new Fragment_Edit_Item();
                 fragment_edit_item.setArguments(bundle);
+                fragment_edit_item.setiRefreshPage(iRefreshPage);
 
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .add(R.id.Frame_Main, fragment_edit_item).addToBackStack(null).commit();
@@ -370,57 +388,64 @@ public class Fragment_Show_Details_My_Item extends BaseFragment implements View.
     //اگر کاربر بخواهد آیتم را حذف کند متد زیر را فراخوانی می کند
     void DeleteItem() {
 
-        final ProgressDialog progress = new ProgressDialog(getActivity());
-        progress.setTitle((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.Sending) + "</font>")));
-        progress.setMessage((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.PleaseWait) + "</font>")));
-        progress.show();
-
-        final String Unique = tbl_user.GetUniCode();
-        String Url = Api + "Item/" + ItemId + "?UniqueCode=" + Unique;
-
-        DeleteRequst = new JsonObjectRequest(Request.Method.DELETE, Url, null, new Response.Listener<JSONObject>() {
+        Dialog_Confirm dialog_confirm=new Dialog_Confirm(getString(R.string.Delete_This_Item), getString(R.string.yes), getString(R.string.no), new onClickDialog_Confirm() {
             @Override
-            public void onResponse(JSONObject response) {
-                progress.dismiss();
-                try {
-                    boolean Resault = response.getBoolean("Resalt");
+            public void ok() {
+                final ProgressDialog progress = new ProgressDialog(getActivity());
+                progress.setTitle((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.Sending) + "</font>")));
+                progress.setMessage((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.PleaseWait) + "</font>")));
+                progress.show();
 
-                    if (Resault) {
-                        btn_Delete.setVisibility(View.GONE);
-                        btn_Edit.setEnabled(false);
-                        btn_Undo.setVisibility(View.VISIBLE);
-                    } else {
-                        Toast.makeText(getActivity(), response.getString("Message"), Toast.LENGTH_SHORT).show();
+                final String Unique = tbl_user.GetUniCode();
+                String Url = Api + "Item/" + ItemId + "?UniqueCode=" + Unique;
+
+                DeleteRequst = new JsonObjectRequest(Request.Method.DELETE, Url, null, response -> {
+                    progress.dismiss();
+                    try {
+                        boolean Resault = response.getBoolean("Resalt");
+
+                        if (Resault) {
+//                        btn_Delete.setVisibility(View.GONE);
+//                        btn_Edit.setEnabled(false);
+//                        btn_Undo.setVisibility(View.VISIBLE);
+                            iRefreshPage.onReload();
+                            getActivity().onBackPressed();
+                        } else {
+                            Toast.makeText(getActivity(), response.getString("Message"), Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                progress.dismiss();
-                boolean hasInternet = ((MainActivity) getActivity()).internet.HaveNetworkConnection();
+                }, error -> {
+                    progress.dismiss();
+                    boolean hasInternet = ((MainActivity) getActivity()).internet.HaveNetworkConnection();
 
-                if (hasInternet == false) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.CheckYourInternet), Toast.LENGTH_SHORT).show();
-                } else {
-                    new AlertDialog.Builder(getActivity())
-                            .setTitle((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.Error) + "</font>")))
-                            .setMessage((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.YourInternetIsVerySlow) + "</font>")))
-                            .setPositiveButton((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.Reload) + "</font>")), new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    DeleteItem();
-                                }
-                            })
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .setCancelable(true)
-                            .show();
-                }
+                    if (!hasInternet) {
+                        Toast.makeText(getActivity(), getResources().getString(R.string.CheckYourInternet), Toast.LENGTH_SHORT).show();
+                    } else {
+                        new AlertDialog.Builder(getActivity())
+                                .setTitle((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.Error) + "</font>")))
+                                .setMessage((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.YourInternetIsVerySlow) + "</font>")))
+                                .setPositiveButton((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.Reload) + "</font>")), new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        DeleteItem();
+                                    }
+                                })
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .setCancelable(true)
+                                .show();
+                    }
+                });
+
+                AppController.getInstance().addToRequestQueue(SetTimeOuteToPost(DeleteRequst));
+            }
+
+            @Override
+            public void cancel() {
+
             }
         });
-
-        AppController.getInstance().addToRequestQueue(SetTimeOuteToPost(DeleteRequst));
+        dialog_confirm.show(getActivity().getSupportFragmentManager(),Dialog_Confirm.TAG);
     }
 
     //در اینجا زمانی که کاربر پشیمان شود که آیتم حذف شده را آندو کند متد زیر را فراخوانی میکند
@@ -477,7 +502,7 @@ public class Fragment_Show_Details_My_Item extends BaseFragment implements View.
     void SetTypeItem(int Type) {
         try {
 
-            Dialog_Confirm dialog_confirm=new Dialog_Confirm(getString(R.string.The_amount_of_2000_Tomans_will_be_deducted_from_your_wallet), new onClickDialog_Confirm() {
+            Dialog_Confirm dialog_confirm = new Dialog_Confirm(getString(R.string.The_amount_of_2000_Tomans_will_be_deducted_from_your_wallet), new onClickDialog_Confirm() {
                 @Override
                 public void ok() {
 
@@ -488,16 +513,16 @@ public class Fragment_Show_Details_My_Item extends BaseFragment implements View.
 
                     String Url = Api + "Item?ItemId=" + ItemId + "&UniCode=" + UniCode + "&Type=" + Type;
 
-                    PutTypeItem=new JsonObjectRequest(Request.Method.PUT,Url,null,response -> {
+                    PutTypeItem = new JsonObjectRequest(Request.Method.PUT, Url, null, response -> {
 
                         try {
                             Loading.stopShimmerAnimation();
                             SetEnabledAllButton(true);
 
-                            if (response.getBoolean("Resalt")){
+                            if (response.getBoolean("Resalt")) {
                                 SetEnabled_btn_TypeItem(false);
                                 Toast.makeText(getContext(), response.getString("Message"), Toast.LENGTH_SHORT).show();
-                            }else{
+                            } else {
                                 SetEnabled_btn_TypeItem(true);
                                 Toast.makeText(getContext(), response.getString("Message"), Toast.LENGTH_SHORT).show();
                             }
@@ -507,7 +532,7 @@ public class Fragment_Show_Details_My_Item extends BaseFragment implements View.
                             e.printStackTrace();
                         }
 
-                    },error -> {
+                    }, error -> {
 
                         SetEnabledAllButton(true);
                         Loading.stopShimmerAnimation();
@@ -540,34 +565,48 @@ public class Fragment_Show_Details_My_Item extends BaseFragment implements View.
 
                 }
             });
-            dialog_confirm.show(getActivity().getSupportFragmentManager(),Dialog_Confirm.TAG);
+            dialog_confirm.show(getActivity().getSupportFragmentManager(), Dialog_Confirm.TAG);
 
         } catch (Exception e) {
         }
     }
 
     //در اینجا فعال شدن یا نشده دکمه های ویژه و فوری ست می شود
-    void SetEnabled_btn_TypeItem(boolean t){
+    void SetEnabled_btn_TypeItem(boolean t) {
         btn_Special.setEnabled(t);
         btn_instantaneous.setEnabled(t);
 
-        if (t){
+        if (t) {
             btn_Special.setBackground(getResources().getDrawable(R.drawable.background_btn_special));
             btn_instantaneous.setBackground(getResources().getDrawable(R.drawable.background_btn_central));
-        }else{
+        } else {
             btn_Special.setBackgroundColor(getResources().getColor(R.color.colorLowBlack2));
             btn_instantaneous.setBackgroundColor(getResources().getColor(R.color.colorLowBlack2));
         }
     }
 
     //در اینجا وضعیت فعال کردن یا غیر فعال کردن دکمه ها ست می شود
-    void SetEnabledAllButton(boolean res){
+    void SetEnabledAllButton(boolean res) {
         btn_Special.setEnabled(res);
         btn_instantaneous.setEnabled(res);
         btn_Delete.setEnabled(res);
         btn_Edit.setEnabled(res);
         btn_Undo.setEnabled(res);
         Back.setEnabled(res);
+    }
+
+    //در اینجا مبلغ سه رقم جدا خواهد شد
+    String showPrice(String price) {
+        price = price.replace(",", "");
+
+        if (price.length() > 0) {
+            DecimalFormat sdd = new DecimalFormat("#,###");
+            Double doubleNumber = Double.parseDouble(price);
+
+            String format = sdd.format(doubleNumber);
+            return format;
+        }
+        return price;
     }
 
 }

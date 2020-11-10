@@ -34,6 +34,8 @@ public class txt_Price_Watcher implements TextWatcher {
 
         s = s.replace(",", "");
         s = s.replace("٬", "");
+        s = Replace.Number_fn_To_en(s);
+
         if (s.length() > 0) {
             DecimalFormat sdd = new DecimalFormat("#,###");
             Double doubleNumber = Double.parseDouble(s);

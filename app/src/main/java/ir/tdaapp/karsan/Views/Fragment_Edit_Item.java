@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -73,6 +74,7 @@ import ir.tdaapp.karsan.DataBase.Tbl_User;
 import ir.tdaapp.karsan.Enum.Gender;
 import ir.tdaapp.karsan.MainActivity;
 import ir.tdaapp.karsan.R;
+import ir.tdaapp.karsan.Services.IRefreshPage;
 import ir.tdaapp.karsan.Utility.AppController;
 import ir.tdaapp.karsan.Utility.Base64Image;
 import ir.tdaapp.karsan.Utility.BaseFragment;
@@ -113,6 +115,8 @@ public class Fragment_Edit_Item extends BaseFragment implements View.OnClickList
     int ItemId;
     RequestQueue requestQueue;
     RadioGroup InsuranceGroup, WorkExperienceGroup, timeGroup;
+    IRefreshPage iRefreshPage;
+    CheckBox chk_Agreement;
 
     @Nullable
     @Override
@@ -133,6 +137,10 @@ public class Fragment_Edit_Item extends BaseFragment implements View.OnClickList
         GetDetailsItem();
 
         return view;
+    }
+
+    public void setiRefreshPage(IRefreshPage iRefreshPage) {
+        this.iRefreshPage = iRefreshPage;
     }
 
     @Override
@@ -190,6 +198,7 @@ public class Fragment_Edit_Item extends BaseFragment implements View.OnClickList
         InsuranceGroup = view.findViewById(R.id.InsuranceGroup);
         WorkExperienceGroup = view.findViewById(R.id.WorkExperienceGroup);
         timeGroup = view.findViewById(R.id.timeGroup);
+        chk_Agreement = view.findViewById(R.id.chk_Agreement);
 
         tbl_madrak = new Tbl_Madrak(((MainActivity) getActivity()).dbAdapter);
         tbl_major = new Tbl_Major(((MainActivity) getActivity()).dbAdapter);
@@ -263,6 +272,11 @@ public class Fragment_Edit_Item extends BaseFragment implements View.OnClickList
     }
 
     void OnClick() {
+
+        chk_Agreement.setOnCheckedChangeListener((compoundButton, b) -> {
+            txt_MinPrice.setEnabled(!b);
+            txt_MaxPrice.setEnabled(!b);
+        });
 
         txt_MaxPrice.addTextChangedListener(new txt_Price_Watcher(txt_MaxPrice));
         txt_MinPrice.addTextChangedListener(new txt_Price_Watcher(txt_MinPrice));
@@ -522,9 +536,11 @@ public class Fragment_Edit_Item extends BaseFragment implements View.OnClickList
             return false;
 
         //در اینجا حداکثر حقوق چک می شود
-        Valid = !Validation.Required(txt_MaxPrice, getResources().getString(R.string.ThisValueMustBeFilled));
-        if (!Valid)
-            return false;
+        if (!chk_Agreement.isChecked()){
+            Valid = !Validation.Required(txt_MaxPrice, getResources().getString(R.string.ThisValueMustBeFilled));
+            if (!Valid)
+                return false;
+        }
 
         //در اینجا توضیحات چک می شود
         Valid = !Validation.Required(txt_Description, getResources().getString(R.string.ThisValueMustBeFilled));
@@ -584,8 +600,16 @@ public class Fragment_Edit_Item extends BaseFragment implements View.OnClickList
         String NationalCode = Replace.Number_fn_To_en(txt_NationalCode.getText().toString());
         String Age = txt_Age.getText().toString();
         String HoursOfWork = txt_HoursOfWork.getText().toString();
-        String MaxPrice = Replace.Number_fn_To_en(txt_MaxPrice.getText().toString().replace(",", "").replace("٬", ""));
-        String MinPrice = Replace.Number_fn_To_en(txt_MinPrice.getText().toString().replace(",", "").replace("٬", ""));
+
+        String MaxPrice, MinPrice;
+        if (!chk_Agreement.isChecked()) {
+            MaxPrice = Replace.Number_fn_To_en(txt_MaxPrice.getText().toString().replace(",", "").replace("٬", ""));
+            MinPrice = Replace.Number_fn_To_en(txt_MinPrice.getText().toString().replace(",", "").replace("٬", ""));
+        } else {
+            MaxPrice = MinPrice = "-1";
+        }
+
+
         String Description = txt_Description.getText().toString();
         String UniCode = tbl_user.GetUniCode();
 
@@ -667,6 +691,9 @@ public class Fragment_Edit_Item extends BaseFragment implements View.OnClickList
                 @Override
                 public void onResponse(JSONObject response) {
                     progress.dismiss();
+                    if (iRefreshPage != null) {
+                        iRefreshPage.onReload();
+                    }
                     try {
                         Toast.makeText(getActivity(), response.getString("Message"), Toast.LENGTH_LONG).show();
                     } catch (JSONException e) {
@@ -779,18 +806,26 @@ public class Fragment_Edit_Item extends BaseFragment implements View.OnClickList
                     txt_Age.setText(response.getString("Age"));
                     txt_HoursOfWork.setText(response.getString("HoursOfWork"));
 
-                    //در اینجا حداقل حقوق ست می شود
-                    if (!response.getString("MinPrice").equalsIgnoreCase("0") && !response.getString("MinPrice").equalsIgnoreCase("")) {
-                        txt_MinPrice.setHint("");
-                        txt_MinPrice.setTextDirection(View.TEXT_DIRECTION_LTR);
-                        txt_MinPrice.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
-                        txt_MinPrice.setText(response.getString("MinPrice"));
-                    }
+                    chk_Agreement.setChecked(false);
+                    if (!response.getString("MinPrice").equalsIgnoreCase("-1") &&
+                            !response.getString("MaxPrice").equalsIgnoreCase("-1")) {
 
-                    txt_MaxPrice.setHint("");
-                    txt_MaxPrice.setTextDirection(View.TEXT_DIRECTION_LTR);
-                    txt_MaxPrice.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
-                    txt_MaxPrice.setText(response.getString("MaxPrice"));
+                        //در اینجا حداقل حقوق ست می شود
+                        if (!response.getString("MinPrice").equalsIgnoreCase("0") && !response.getString("MinPrice").equalsIgnoreCase("")) {
+                            txt_MinPrice.setHint("");
+                            txt_MinPrice.setTextDirection(View.TEXT_DIRECTION_LTR);
+                            txt_MinPrice.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+                            txt_MinPrice.setText(response.getString("MinPrice"));
+                        }
+
+                        txt_MaxPrice.setHint("");
+                        txt_MaxPrice.setTextDirection(View.TEXT_DIRECTION_LTR);
+                        txt_MaxPrice.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+                        txt_MaxPrice.setText(response.getString("MaxPrice"));
+
+                    } else {
+                        chk_Agreement.setChecked(true);
+                    }
 
                     //در اینجا مدارک تحصیلی ست می شوند
                     List<Integer> MadraksIds = new ArrayList<>();
@@ -859,28 +894,25 @@ public class Fragment_Edit_Item extends BaseFragment implements View.OnClickList
                 }
 
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                progress.dismiss();
-                boolean HasInternet = ((MainActivity) getActivity()).internet.HaveNetworkConnection();
+        }, error -> {
+            progress.dismiss();
+            boolean HasInternet = ((MainActivity) getActivity()).internet.HaveNetworkConnection();
 
-                if (!HasInternet) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.CheckYourInternet), Toast.LENGTH_LONG).show();
-                } else {
-                    new AlertDialog.Builder(getActivity())
-                            .setTitle((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.Error) + "</font>")))
-                            .setMessage((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.YourInternetIsVerySlow) + "</font>")))
-                            .setPositiveButton((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.Ok) + "</font>")),
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            GetDetailsItem();
-                                        }
-                                    })
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .setCancelable(true)
-                            .show();
-                }
+            if (!HasInternet) {
+                Toast.makeText(getActivity(), getResources().getString(R.string.CheckYourInternet), Toast.LENGTH_LONG).show();
+            } else {
+                new AlertDialog.Builder(getActivity())
+                        .setTitle((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.Error) + "</font>")))
+                        .setMessage((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.YourInternetIsVerySlow) + "</font>")))
+                        .setPositiveButton((Html.fromHtml("<font color='#FF7F27'>" + getResources().getString(R.string.Ok) + "</font>")),
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        GetDetailsItem();
+                                    }
+                                })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setCancelable(true)
+                        .show();
             }
         });
 

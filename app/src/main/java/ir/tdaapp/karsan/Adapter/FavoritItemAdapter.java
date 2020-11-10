@@ -55,7 +55,13 @@ public class FavoritItemAdapter extends RecyclerView.Adapter<FavoritItemAdapter.
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         holder.lbl_Title.setText(vals.get(position).getTitle());
-        holder.lbl_Price.setText(vals.get(position).getPrice());
+
+        if (!vals.get(position).getPrice().contains("-1") && !vals.get(position).getPrice().contains("-۱")) {
+            holder.lbl_Price.setText(vals.get(position).getPrice());
+        } else {
+            holder.lbl_Price.setText(context.getString(R.string.Agreement));
+        }
+
         holder.lbl_Time.setText(vals.get(position).getTime());
 
         int TypeItem = vals.get(position).getType();

@@ -57,7 +57,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
 
         holder.lbl_Title.setText(vals.get(position).getTitle());
-        holder.lbl_Price.setText(vals.get(position).getPrice());
+
+        if (!vals.get(position).getPrice().contains("-1") && !vals.get(position).getPrice().contains("-۱")) {
+            holder.lbl_Price.setText(vals.get(position).getPrice());
+        } else {
+            holder.lbl_Price.setText(context.getString(R.string.Agreement));
+        }
+
         holder.lbl_Time.setText(vals.get(position).getTime());
 
         int TypeItem = vals.get(position).getType();
@@ -79,19 +85,15 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
                 .error(R.drawable.error_slider)
                 .into(holder.image_Item);
 
-        holder.Layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putInt("Id", vals.get(position).getId());
+        holder.Layout.setOnClickListener(view -> {
+            Bundle bundle = new Bundle();
+            bundle.putInt("Id", vals.get(position).getId());
 
-                Fragment_Show_Details_Item item = new Fragment_Show_Details_Item();
-                item.setArguments(bundle);
+            Fragment_Show_Details_Item item = new Fragment_Show_Details_Item();
+            item.setArguments(bundle);
 
-                ((AppCompatActivity) context).getSupportFragmentManager()
-                        .beginTransaction().add(R.id.Frame_Main, item, Fragment_Show_Details_Item.TAG).addToBackStack(null).commit();
-
-            }
+            ((AppCompatActivity) context).getSupportFragmentManager()
+                    .beginTransaction().add(R.id.Frame_Main, item, Fragment_Show_Details_Item.TAG).addToBackStack(null).commit();
         });
     }
 
